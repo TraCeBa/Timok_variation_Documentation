@@ -35,8 +35,9 @@ library(leaflet)
 
 ## Introduction
 
+The present document is appendix to the manuscript Under the magnifying glass. Dimensions of variation in the contemporary Timok variety.
 
-The paper deals with morphosyntactic and socio-geographic variation in a South Slavic Timok variety spoken in Southeast Serbia. Four linguistic features are analysed in the context of variation between East South Slavic/Standard Serbian on the one side, and Balkan Slavic/non-standard on the other. The features selected for the analysis are:
+The manuscript deals with morphosyntactic and socio-geographic variation in a South Slavic Timok variety spoken in Southeast Serbia. Four linguistic features are analysed in the context of variation between East South Slavic/Standard Serbian on the one side, and Balkan Slavic/non-standard on the other. The features selected for the analysis are:
 
 - marking of indirect object and possessor 
 - post-positive demonstratives
