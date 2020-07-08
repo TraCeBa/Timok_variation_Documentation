@@ -1,0 +1,1199 @@
+---
+title: |-
+  Under the magnifying glass. Dimensions of variation in the contemporary Timok variety
+  Documentation
+output:
+  html_document: default
+  word_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(webshot)
+webshot::install_phantomjs()
+
+library(tinytex)
+
+library(ggplot2)
+library(ggrepel)
+library(ggmosaic)
+library(gridExtra)
+
+library(tidyverse)
+library(reshape)
+library(vcd)
+library(viridis)
+library(plyr)
+library(dplyr)
+library(leaflet)
+
+```
+
+## Introduction
+
+
+The paper deals with morphosyntactic and socio-geographic variation in a South Slavic Timok variety spoken in Southeast Serbia. Four linguistic features are analysed in the context of variation between East South Slavic/Standard Serbian on the one side, and Balkan Slavic/non-standard on the other. The features selected for the analysis are:
+
+- marking of indirect object and possessor 
+- post-positive demonstratives
+- dative reflexive si as a particle
+- auxiliary omission in the perfect tense 
+
+The present document follows the analysis presented in the paper and provides data and methodological processes used. It thus orderly refers to the sections and subsections from the manuscript.
+
+For the purposes of the present paper, corpus files were searched using Python. The published online version of the corpus will provide different search options.
+
+Note that in this document, some pieces of code have been hidden to make it more readable. The entire code is available in the source script with the .Rmd extension.
+
+## 3. Facets of variation
+
+## 3.1 The analysis of morphosyntactic factors
+
+### 3.1.1 Marking of indirect object and possessor
+
+The analysis is based on the following variables:
+
+- Dependent variable: type of marking (na + general oblique case vs. inflectional dative)
+- Independent variables: function (indirect object, possessor), part-of-speech (nouns, pronouns, ‘other’), nominal categories (proper/common nouns, grammatical number, grammatical gender, animacy)
+
+The data used in the analysis is stored in the file 1_data.xlsx. The data was extracted from the corpus semi-automatically. Firstly Python script was used to extract all the instances of dative or "NA" + noun/pronoun patterns.
+
+00_IO_na_search.py
+
+00_IO_dative_search.py
+
+Noun forms were approximated using word endings for inflected and non-inflected forms. For pronouns, a list of all pronominal forms was used (see in scripts). Context where IO is expected to appear is approximated with a list of verbs requiring an IO (see in scripts).
+
+This data was then filtered manually example, by example. The final list of examples was labelled manually for the perametres included in the analysis. The filtered data was further segmented by focusing on particular criteria for each analysis. 
+
+Frequencies of na ‘on’ + general oblique case and synthetic dative are normalized with regard to the overall number of relevant parts of speech and nominal categories retrieved from the corpus and multiplied with 10.000 in case of the PoS, gender and number, but with 1.000 in case of type of noun and animacy.
+
+The file 1_marking_examples.xlsx is organized in sheets as follows:
+
+1. Case, PoS, Function - rows contain examples extracted from the corpus. Columns contain informtaion about Case, Function, PoS for each example (manually annotated) 
+2. IO PoS RAW - data from Case, PoS, Function, only for IO. It contains also a summary table with absolute frequencies regarding PoS.
+3. POSS PoS RAW - data from Case, PoS, Function, only for POSS It contains also a summary table with absolute frequencies regarding PoS.
+4. Freq PoS tablss - repeated summary tables from  zbirne tabele 2. IO PoS RAW and 3. POSS PoS RAW, with calculated percentages, normalized per total number of the respective caegory.
+5. Nominal categories RAW data - (for nouns only!) rows contain examples extracted from the corpus. Columns contain informtaion about nominal categories: Type of Noun (proper, common), Gender (masculine, feminine, neuter), Number (singular, plural), Animacy (animate, inanimate). 
+6. % for Nominal categories - Summary table based on data from 5. Nominal categories RAW data, with percentages and normalized frequencies per total number of nouns of each type/gender/number/animacy. The data for Type of Nouns is marked in yellow. The final table used for Figure 3 is highlited in red.
+7. corpus_PoS_frequencies - frequencies extracted from the corpus for each PoS and nominal categories. The last row shows total frequency for each column.
+
+In what follows analyses are presented as they appear in the paper.
+
+Chi square test is used to compare analysed observations of analytic vs. synthetic marking in the whole sample. The test is performed using the data in the file 1_analytic_synthetic_marking.csv' which contains all examples of IO and POSS extracted from the corpus, labelled for the type of marking: analytic=0, synthetic=1 (from the file 1_data.xlsx, sheet 1. Case, PoS, Function, column Case). The values were relabelled below 0="NA+OBL", 1="DAT" here for clearer representation.
+
+
+```{r include=FALSE}
+analytic_synthetic_marking = read.csv('1_analytic_synthetic_marking.csv', header = TRUE, sep = "\t", stringsAsFactors = TRUE)
+
+analytic_synthetic_marking_chisq = table(analytic_synthetic_marking$Case)
+```
+```{r }
+head(analytic_synthetic_marking)
+```
+
+
+The sum of each category is used as input for Chi-square test.
+
+
+```{r }
+head(analytic_synthetic_marking_chisq)
+chisq.test(analytic_synthetic_marking_chisq)
+
+```
+
+
+Chi-square test is used to compare frequencies of analytic and synthetic type of marking with regard to their function (indirect object, possessive).
+
+
+```{r include=FALSE}
+marking_function_chisq = read.csv('1_marking_function_chisq.csv', header = TRUE, sep = "\t", row.names = 'function.', stringsAsFactors = TRUE)
+```
+```{r }
+head(marking_function_chisq)
+chisq.test(marking_function_chisq, simulate.p.value = TRUE)
+```
+
+
+The percentage of each category is visualised in Figure 1, based on the data from the file 1_marking_type_function.csv. The data was obtained by categorizing each example based on the type of marking and function (see 1_data.xlsx, 1. Case, PoS, Function, columns Case and funciton).
+
+
+```{r include=FALSE}
+marking_type_function = read.csv("1_marking_type_function.csv", header = TRUE, stringsAsFactors = TRUE, sep = ",")
+
+Figure1 = ggplot(marking_type_function, aes(fill=marking_function, y=marking_percent, x=marking_type, label = marking_percent)) +
+  geom_bar(position="stack", stat="identity")+
+  geom_text(aes(fill=marking_function, y=marking_percent, x=marking_type, label = marking_percent),nudge_y = 3, size = 4, inherit.aes = FALSE)+
+  labs(title = NULL, x = "Type of marking", y = "Percentage", fill = "Function")+
+  theme_light()+
+  scale_fill_manual(values = c("grey89", 'grey48'))+
+  theme(axis.text = element_text(size = 10),
+        axis.title = element_text(size = 10),
+        legend.title = element_text(size = 15),
+        title = element_text(size = 15))+
+  expand_limits(y = 100)
+```
+```{r }
+marking_type_function
+```
+```{r, fig.height=3, fig.width=4, fig.cap="Figure 1: Type of marking: overall and per functions"}
+Figure1
+```
+
+
+The data for analytic and syntetic marking was sorted based on part-of-speech categories. Frequencies were extracted from the 1_data.xlsx file and presented in the file 1_marking_function_pos.csv. 
+
+
+```{r include=FALSE}
+marking_function_pos = read.csv('1_marking_function_pos.csv', header = TRUE, sep = "\t")
+```
+```{r }
+head(marking_function_pos)
+```
+
+
+The values for indirect oblect and possessive function with respect to PoS categories are presented in Figure 2.
+
+
+```{r include=FALSE}
+Figure2 = ggplot(marking_function_pos, aes(y=Values, x=POS, fill = Type_of_marking)) + 
+  geom_bar(position="stack", stat="identity")+
+  geom_text_repel(aes(label = Values),
+                  position = position_stack(reverse = FALSE), 
+                  stat = "identity", size = 4)+
+  labs(title = NULL, x = "Part of speech", y = "Normalized frequency")+
+  facet_grid(cols = vars(Function))+
+  theme_light()+
+  scale_fill_manual(values = c("grey89", 'grey48'))+
+  theme(axis.text = element_text(size = 10), 
+        axis.title = element_text(size = 10),
+        legend.title = element_blank(),
+        panel.spacing = unit(2, 'lines'),
+        strip.text.x = element_text(size = 10))+
+  expand_limits(y = 100)
+```
+```{r , fig.height=3, fig.cap="Figure 2: Marking of case in IO and POSS function with respect to PoS"}
+Figure2
+```
+
+
+Data for IO was categorized based on nominal categories (type of noun, gender, number animacy) and stored in the file 1_marking_nominal_category.csv. It is visualised in Figure 3.
+
+
+```{r include=FALSE}
+
+marking_nom_cat=read.csv('1_marking_nominal_category.csv',sep = ',', stringsAsFactors = TRUE, header = TRUE)
+
+Figure3 = ggplot(marking_nom_cat, 
+                              aes(y=CASE_NOM_CAT_values, x=CASE_NOM_CAT_CAT)) + 
+  geom_bar(position="stack", stat="identity",
+           aes(fill = CASE_NOM_CAT_FORM))+
+  geom_text_repel(aes(label = CASE_NOM_CAT_values),
+                  position = position_stack(reverse = TRUE),
+                  size = 4)+
+  labs(title = NULL, x = "Nominal categories",
+       y = "Normalized frequency")+
+  facet_grid(cols = vars(CASE_NOM_CAT_TYPE),
+             scales = "free")+
+  theme_light()+
+  scale_fill_manual(values = c("grey89", 'grey48'))+
+  theme(axis.text = element_text(size = 10), 
+        axis.title = element_text(size = 10),
+        legend.title = element_blank(),
+        strip.text.x = element_text(size = 10),
+        panel.spacing = unit(2, 'lines'))+
+  expand_limits(y = 100)
+```
+```{r, fig.width=9, fig.height=3, fig.cap="Figure 3: Case marking with regard to nominal categories"}
+Figure3
+```
+
+### 3.1.2 Post-positive demonstratives
+
+In order to identify the distribution of different forms of PPD (nominative/unmarked vs. accusative/oblique, as well based on gender), nouns containing PPD were compared against bare nouns. The comparison regarding gender includes all nouns, while the comparison concerning case takes into account only nouns of the grammatical feminine gender ending in -a and masculine animate nouns ending in a consonant (regardless of the syntactic position). The following variables were used:
+
+- Dependent variable: frequency of the nouns containing PPD and bare nouns (absolute and normalized per 10000 nouns)
+- Independent variables: gender of nouns (masculine ending in consonant, feminine ending in -a, neuter), case of nouns (nominative/unmarked and oblique/accusative singular)
+
+Words with articles were extracted from the corpus based on their form. The resulting list contains 817 types of all PoS categories (1313 tokens). These words were manually annotated for PoS categories for the purposes of the analysis, because some PoS labels had been initially wrong. The examples of words containing PPD are stored in the file 2_PPD_examples.xlsx.
+
+The analysis in the present study involved nouns only, as explained in the manuscript For the analysis of nouns of all three genders, the data was extracted and categorized using PoS tags. The extraction of nouns of grammatical feminine gender (feminine and masculine nouns ending in -a) and animate masculine nouns ending in consonant was based on manually selected lists of lemmas of each category. The lists were created by etracting all feminine and masculine nouns endiing in -a and removing the incorrect instances. The feminine group includes the first 1337 correct lemmas, because the proportion of unwanted results became much bigger afterwards. Both masculine groups contain all lemmas retreived from the corpus fitting the criteria. Results regarding case were obtained using the lists of lemmas and the morphological form. The lists of lemmas are available in files 2_PPD_masculine_nouns_in_a.txt, 2_PPD_masculine_animate_nouns_in_consonant.txt, 2_PPD_feminine_nouns_in_a.txt. The number of elements in each list is shown below (not included in the manuscript).
+
+
+``` {r include=FALSE}
+lists_of_lemmas_gender = data.frame(Category = c("Masculine animate in consonant", "Feminine in -a", "Masculine in -a"), List_size = c(336,1337,109), stringsAsFactors = TRUE)
+```
+```{r}
+lists_of_lemmas_gender
+
+``` 
+
+
+All nouns were compared for gender, categorized based on gender and the presence of PPD. The total number of bare nouns of all genders is 74769. The total number of nouns with PPD is 1182. The data used in the analysis is presented in the file 2_PPD_gender_absfreq.csv.
+
+
+``` {r include=FALSE}
+PPD_gen_all = read.csv('2_PPD_gender_absfreq.csv',sep = ',', header = TRUE, row.names = "X", stringsAsFactors = TRUE)
+PPD_gen_all$X.1=NULL
+
+PPD_gen_all_percent = read.csv('2_PPD_gender_proportions.csv', header = TRUE, stringsAsFactors = TRUE, sep = ',')
+
+Figure4 = ggplot(data=PPD_gen_all_percent, aes(x=gen_all_percent_gen, y=gen_all_percent_value, fill= gen_all_percent_ppd)) +
+  geom_bar(position = "dodge", stat="identity", fill = "gray")+
+  geom_text(aes(x=gen_all_percent_gen, y=gen_all_percent_value, fill= gen_all_percent_ppd, label = gen_all_percent_value), nudge_y = 3, size = 5)+
+  facet_grid(cols = vars(gen_all_percent_ppd))+
+  scale_x_discrete(limits=PPD_gen_all_percent$gen_all_percent_gen)+
+  expand_limits(y = 60)+
+  theme_light()+
+  labs(title = NULL, x = NULL, y = "Percentage")+
+  theme(axis.title = element_text(size = 15),
+        axis.text = element_text(size = 15),
+        legend.position = "none",
+        strip.text.x = element_text(size = 15))
+
+```
+
+
+Absolute frequencies of each gender in bare nouns and nouns containing a PPD are presented in the file 2_PPD_gender_prop.csv.
+
+
+```{r}
+PPD_gen_all
+```
+
+
+Proportions of each gender in bare nouns and nouns containing a PPD is shown in Figure 4.
+
+
+```{r, fig.height=3.5, fig.cap="Figure 4: PPD and gender of nouns"}
+Figure4
+```
+
+
+Chi-square test shows that there is a significant difference in distribution of gender in bare nouns and nouns carrying a PPD.
+
+
+```{r}
+chisq.test(PPD_gen_all)
+``` 
+
+
+Data used for the analysis of the distribution of case marking has been categorized based on the presence of PPD (bare vs. with PPD) and case inflections. The same cateorization was was performed for masculine and feminine nouns separately.
+
+
+```{r include=FALSE}
+# ALL NOUNS	
+ppd_case_gender = read.csv('2_ppd_case_gender.csv', header = TRUE, stringsAsFactors = TRUE, sep = ',')
+
+```
+```{r}
+ppd_case_gender
+```
+
+
+Mosaic plots presenting the proportion of nouns marked and unmarked for case (all nouns, masculine, feminine nouns) is displayed in Figure 5.
+Figure 5: Proportions of nominative/unmarked and oblique/accusative case forms in nouns with and without PPD
+
+
+``` {r include=FALSE}
+
+# all nouns mosaic plot
+
+ppd_mosaic_all = ggplot(data = ppd_case_gender) +
+  geom_mosaic(aes(weight = All_nouns,x = product(Case, PPD), fill=NULL))+
+  labs(title = "All nouns", x =NULL, y = NULL) +
+  theme_light() +
+  theme(axis.text = element_text(size = 15), 
+        axis.title = element_text(size = 15),
+        plot.title = element_text(size=20),
+        panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank())
+
+# MASCULINE animate NOUNS	mosaic plot
+
+ppd_mosaic_masc = ggplot(data = ppd_case_gender) +
+  geom_mosaic(aes(weight = Masculine_animate,x = product(Case, PPD), fill=NULL))+
+  labs(title = "Feminine nouns", x =NULL, y = NULL) +
+  theme_light() +
+  theme(axis.text = element_text(size = 15), 
+        axis.title = element_text(size = 15),
+        plot.title = element_text(size=20),
+        panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank())
+
+# feminine nouns in -a mosaic plot
+ppd_mosaic_fem = ggplot(data = ppd_case_gender) +
+  geom_mosaic(aes(weight = Feminine,x = product(Case, PPD), fill=NULL))+
+  labs(title = "Feminine nouns", x =NULL, y = NULL) +
+  theme_light() +
+  theme(axis.text = element_text(size = 15), 
+        axis.title = element_text(size = 15),
+        plot.title = element_text(size=20),
+        panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank())
+
+```
+```{r, fig.width=11, fig.height=3, fig.cap="Figure 5: Proportions of nominative/unmarked and oblique/accusative case forms in nouns with and without PPD"}
+Figure5 = grid.arrange(ppd_mosaic_all, ppd_mosaic_masc, ppd_mosaic_fem, nrow = 1)
+
+```
+
+### 3.1.3 Particle SI
+
+The analysis is based on the following variables:
+
+- Dependent variable: absolute and normalized frequency of the clitic si used non-pronominally (per 1,000 verbs)
+- Independent variables: properties of the verb (person and number, animacy, reflexivity, lexical type), variation in the syntactic patterns in the contact position between si and the verb
+
+The search was done semioutomatically. A python script was used to search for all the occurences of the word 'si' and some unwanted results were excluded (such as the forms of the 2nd person auxiliary, e.g. Ti si gledal. 'You were watching.'). The rest was removed manually, by checking each example. Each examples was annotated manually for the criteria described in the manuscript.
+
+Manually annotated data used in the analysis is shown in the file XX.xlsx
+
+The frequency of particle SI categorized based on person and number is shown below (see file 3_si_person.csv).
+
+
+```{r include=FALSE}
+si_person = read.csv('3_si_person.csv', header = TRUE, stringsAsFactors = TRUE, sep = ',')
+
+```
+```{r}
+si_person
+```
+```{r, include=FALSE}
+Figure6 = ggplot(data=si_person, aes(x=si_person_labels, y=si_person_value, fill=si_person_pers)) +
+  geom_bar(stat="identity", position = "stack")+
+  scale_fill_manual(values = c("grey89", 'grey48')) +
+  geom_text(aes(x=si_person_labels, y=si_person_value, fill=si_person_pers, label = si_person_value), nudge_y = 3, size = 4)+
+  scale_x_discrete(limits = si_person$si_person_labels)+
+  guides(fill = guide_legend(reverse = TRUE))+
+  labs(title = NULL, x = "Person and number", y = "Proportions", fill = 'Number') +
+  theme_light() +
+  theme(axis.text = element_text(size = 10), 
+        axis.title = element_text(size = 10),
+        legend.title = element_text(size = 15))
+```
+```{r, fig.height=3.5, fig.cap="Figure 6: Si particle frequency: Person and number of the verb" }
+Figure6
+```
+
+
+Frequency is compared on the basis of grammatical categories: animacy of the subject, reflexivity of the predicate, voice of the predicate.
+
+Animacy (see file 4_si_animacy.csv):
+
+
+```{r, include=FALSE}
+si_animacy = read.csv('3_si_animacy.csv', header = TRUE, stringsAsFactors = TRUE, sep = ',')
+
+```
+```{r}
+si_animacy
+```
+```{r, include=FALSE}
+si_animacy_plot = ggplot(data=si_animacy, aes(x=si_animacy_label, y=si_animacy_value)) +
+  geom_bar(stat="identity", fill="gray")+
+  geom_text(aes(x=si_animacy_label, y=si_animacy_value, label = si_animacy_value), nudge_y = 3, size = 4)+
+  scale_x_discrete(limits=si_animacy$si_animacy_label)+
+  labs(title = NULL, x = "Animacy", y = "Percentage")+
+  expand_limits(y = 100)+
+  theme_light() +
+  expand_limits(y = 100) +
+  theme(axis.text = element_text(size = 10), 
+        axis.title = element_text(size = 10),
+        legend.title = element_text(size = 10))
+```
+
+
+Reflexivity (see file 4_si_refl.csv):
+
+
+```{r, include=FALSE}
+si_refl = read.csv('3_si_refl.csv', header = TRUE, stringsAsFactors = TRUE, sep = ',')
+
+```
+```{r}
+si_refl
+```
+```{r, include=FALSE}
+si_refl_plot = ggplot(data=si_refl, aes(x=si_refl_label, y=si_refl_value)) +
+  geom_bar(stat="identity", fill="gray")+
+  geom_text(aes(x=si_refl_label, y=si_refl_value, label = si_refl_value), nudge_y = 3, size = 4)+
+  scale_x_discrete(limits=si_refl$si_refl_label)+
+  labs(title = NULL, x = "Reflexivity", y = "Percentage")+
+  expand_limits(y = 100)+
+  theme_light() +
+  expand_limits(y = 100) +
+  theme(axis.text = element_text(size = 10), 
+        axis.title = element_text(size = 10),
+        legend.title = element_text(size = 10))
+```
+
+
+Voice (see file 4_si_voice.csv):
+
+
+```{r, include=FALSE}
+si_voice = read.csv('3_si_voice.csv', header = TRUE, stringsAsFactors = TRUE, sep = ',')
+
+```
+```{r}
+si_voice
+```
+```{r, include=FALSE}
+si_voice_plot = ggplot(data=si_voice, aes(x=si_voice_label, y=si_voice_value)) +
+  geom_bar(stat="identity", fill="gray")+
+  geom_text(aes(x=si_voice_label, y=si_voice_value, label = si_voice_value), nudge_y = 3, size = 4)+
+  scale_x_discrete(limits=si_voice$si_voice_label)+
+  labs(title = NULL, x = "Voice", y = "Percentage")+
+  expand_limits(y = 100)+
+  theme_light() +
+  expand_limits(y = 100) +
+  theme(axis.text = element_text(size = 10), 
+        axis.title = element_text(size = 10),
+        legend.title = element_text(size = 10))
+
+```
+
+
+Figure 7 shows the frequencies of the occurrences of the particle 'si' categorized based om the three linguistic features: animacy, reflexivity, voice.
+
+
+```{r, fig.height=3, fig.cap="Figure 7: Si particle frequency: Animacy, reflexivity, voice"}
+Figure7 = grid.arrange(si_animacy_plot, si_refl_plot, si_voice_plot, nrow = 1)
+```
+
+
+The data presenting the analysis of the order of particle 'si' and the verb is shown in Figure 8 (see file 4_si_order_csv). 
+
+
+```{r, include=FALSE, fig.width=15}
+si_order=read.csv("3_si_order.csv", stringsAsFactors = TRUE, sep = ',', header = TRUE)
+
+Figure8 = ggplot(si_order, aes(y=percent_si, x=verb_si, fill = order_si)) +
+  geom_bar(stat="identity", position = "dodge")+
+  geom_text_repel(aes(label = percent_si), position = position_stack(reverse = TRUE),size = 7)+
+  facet_grid(cols = vars(order_si), scales = "free")+
+  scale_fill_manual(values = c("grey89", 'grey48')) +
+  labs(fill = "Word order", title = NULL, x = NULL, y = "Percentage") +
+  theme_light() +
+  theme(axis.text = element_text(size = 15), 
+        axis.title = element_text(size = 18),
+        legend.title = element_text(size = 18),
+        strip.text.x = element_text(size = 20),
+        panel.spacing = unit(2, 'lines'))
+```
+```{r , fig.width=15, fig.cap="Figure 8: The proportions of contact patterns between si and the verb"}
+Figure8
+```
+
+### 3.1.4 Auxiliary omission in perfect tense
+
+The quantitative analysis of the use of the -AUX forms is based on the following variables:
+
+- The dependant variable: normalized (to the total number of the examples of the use of the perfect tense) frequency of the –AUX and +AUX forms per location. 
+- The independant variables: gender, age + several categorical linguistic variables: acpect, transitivity, lexical group. 
+
+The automatic search for relevant examples in the Timok corpus made with a user Python scriptrequired all the clauses where perfect participle tense is used. These examples were automatically divided into three groups: clauses with –AUX  perfect forms,  clauses with +AUX  perfect forms and clauses with potential mood (the latter group was subsequently excluded from the analysis). 
+The data are presented in two tables. In the table "verb_timok.csv",  each observation represents texts from a single location. In cases, where there were several recordings from one location,  the scores were merged in one observation, assuming that every speaker from a single location represents the same local variety. The table contains the following columns (not all of the information was used in the present study, see in more detail in (Makarova 2021)): ID (recording ID), LOCATION (name of the village), LATITUDE, LONGITUDE,
+total (total number of examples), total_aux(total number of +AUX forms), dist_boarder (distance to the bulgarian border), no_aux (total number of -AUX forms), total_aux_prop (proportion of + AUX forms).
+In the  table "verb_tim_soc2.csv", every observation is a text from a single recording (i.e. the data from same locations are not merged in one observation) contains additional  data on age and gender of every informant.
+The table "gramm.csv" contains contingency table used for the chi-squared test of the categorical linguistic variables. 
+
+The file 4_overall_freq.csv shows the frequency of analysed examples of the perfect tense that display +AUX (total_aux) and -AUX (no_aux) pattern per transcript  (normalized per 1,000 occurrences of the perfect tense).
+
+
+``` {r}
+aux_overall = read.table('4_aux_overall_freq.csv', sep = '\t', header = TRUE, row.names = "ID")
+```
+```{r }
+head(aux_overall)
+```
+
+
+The distribution of +AUX/-AUX patterns in the overall sample is shown in Figure 9. 
+
+
+```{r include=FALSE, warning=FALSE}
+aux_overall2 = melt(aux_overall)
+colnames(aux_overall2) = c("Perfect", "Value")
+aux_overall2$Perfect = revalue(aux_overall2$Perfect, c("total_aux"="With AUX", "no_aux"="No AUX"))
+Figure9 =  ggplot(data =aux_overall2,  aes(x=Perfect, y=Value, fill=Perfect)) +
+  geom_boxplot() +
+  theme_light() +
+  theme(legend.position="none") +
+  scale_fill_manual(values = c("grey89", 'grey48')) +
+  theme(axis.text = element_text(size = 10), 
+        axis.title = element_text(size = 10),
+        legend.title = element_text(15))
+```
+
+Figure 9: +AUX and -AUX frequencies in the overall sample
+
+```{r, fig.height=3, fig.width=4, fig.cap="Figure 9: +AUX and -AUX frequencies in the overall sample" }
+Figure9
+```
+
+
+The total frequency of +AUX and -AUX pattern are presented below (see 4_aux_overall_chisq.csv):
+
+
+``` {r, include=FALSE}
+total_no_aux = sum(aux_overall$no_aux)
+total_with_aux = sum(aux_overall$total_aux)
+aux_overall_chisq = data.frame(cbind(total_no_aux, total_with_aux))
+```
+```{r}
+head(aux_overall_chisq)
+```
+
+Chi-squared test is used to compare the total frequencies of +AUX and -AUX.
+
+```{r}
+chisq.test(aux_overall_chisq)
+```
+
+
+The data used in the analysis of verb categories on the use of AUX is kept in the file 4_gramm.csv. 
+
+
+``` {r, include=FALSE}
+
+# loading the data from the third table
+aux_gramm = read.table('4_aux_gramm.csv', sep = ';', header = TRUE)
+```
+```{r }
+aux_gramm
+```
+
+
+The proportions of the linguistic properties through the -AUX and +AUX forms are displayed in Figure 10.
+
+
+``` {r, include=FALSE, warning=FALSE}
+gramm_prop = aux_gramm
+gramm_prop[1, 2 :7] = (gramm_prop[1, 2 :7] / 1374)
+gramm_prop[1, 2 :7] = round(gramm_prop[1, 2 :7] * 100, 1)
+gramm_prop[2, 2 :7] = (gramm_prop[2, 2 :7] / 1311)
+gramm_prop[2, 2 :7] = round(gramm_prop[2, 2 :7] * 100, 1)
+gram2 = melt(gramm_prop)
+colnames(gram2) = c("Perfect", "Variable", "Value")
+
+Figure10 = ggplot(gram2, aes(x = Variable, y = Value, fill = Perfect)) +
+  geom_bar(stat = "identity", color = "black", position = "dodge", width = 0.4) +
+  theme_light() +
+  theme(axis.text.x = element_text(angle=45, size = 12)) +
+  scale_fill_manual(values = c("grey89", 'grey48')) +
+  ylab("Percentage") +
+  geom_text(label = gram2$Value,  size = 5,  position = position_dodge(width = 1.5))+
+  theme(axis.text = element_text(size = 10), 
+        axis.title = element_text(size = 10),
+        legend.title = element_text(size = 15))+
+  expand_limits(y = 100) 
+
+```
+
+
+Figure 10: Linguistic properties of -AUX and +AUX forms in Timok corpus (proportions)
+
+
+```{r}
+Figure10
+```
+
+
+Chi-squared tests are performed for each verb category separately: aspect, transitivity, lexical group (+/-modal).
+
+Aspect:
+
+
+``` {r, include=FALSE}
+gramm_table_aspect = cbind(c(84, 332), c(1290, 979))
+rownames(gramm_table_aspect) = c("No_AUX", "With_AUX")
+colnames(gramm_table_aspect) = c("Perfective", "imperfective")
+```
+```{r }
+gramm_table_aspect
+chisq.test(gramm_table_aspect)
+```
+
+
+Transitivity:
+
+
+``` {r, include=FALSE}
+gramm_table_trans = cbind(c(201, 539), c(1173, 772))
+rownames(gramm_table_trans) = c("No_AUX", "With_AUX")
+colnames(gramm_table_trans) = c("Transitive", "Intransitive")
+```
+```{r }
+gramm_table_trans
+chisq.test(gramm_table_trans)
+```
+
+
+Lexical group (+/-modal):
+
+
+``` {r, include=FALSE}
+gramm_table_lex = cbind(c(996, 546), c(378, 765))
+rownames(gramm_table_lex) = c("No_AUX", "With_AUX")
+colnames(gramm_table_lex) = c("Modal", "Not modal")
+```
+```{r }
+gramm_table_lex
+chisq.test(gramm_table_lex)
+```
+
+## 3.2 Analysis of the socio-geographic factors
+
+Analysis of social and geographic factors involved the dependent variables:
+
+- proportion of the analytic marking of the indirect object and the possessive per total examples analysed per location
+- normalized frequency of PPD per 1000 nouns per location
+- normalized frequency of particle SI per 1000 verbs
+- normalized frequency of AUX omission per 1000 cases of perfect tense
+
+The independent variables regarding geographic distribution are:
+ 
+- geographic longitude
+- geographic latitude
+- altitude
+- distance from the city of Knjaževac
+
+The independent variables regarding socio-demographic distribution are:
+
+- age
+- gender
+
+
+### Analysis of the geographic factors
+
+We firstly present the comparison of the linguistic frequencies with geographic vairiables (longitude, latitude, altitude, distance from the city). For the analysis of the geographic variables, frequency values have been aggregated for each location. The dependant variables and the geographic variables are continuous. The dependant variable in all 4 analyses does not have normal distribution, so Kendall's correlation test was used. Geographic distribution of frequencies of each feature is presented on maps. (not included in the manuscript)
+
+#### Marking of indirect object and possessor:
+
+
+```{r, include=FALSE}
+marking_geo = read.csv('1_marking_geo.csv', sep = "\t", header = TRUE, na.strings = "")
+
+# the dependent variable is not normally distributed
+plot(density(marking_geo$Freq.NA...ALL))
+shapiro.test(marking_geo$Freq.NA...ALL)
+print(marking_geo$LATITUDE)
+
+# map 1
+marking_map_pal = pal <- colorBin(
+  palette = "black",
+  domain = marking_geo$Freq.NA...ALL)
+
+marking_map <- leaflet(marking_geo) %>%
+  addProviderTiles(providers$Stamen.Toner) %>%
+  addCircles(lng=~LONGITUDE, lat=~LATITUDE, 
+             radius = marking_geo$Freq.NA...ALL*marking_geo$Freq.NA...ALL/5, 
+             color = "Black",
+             label = ~LOCATION)
+
+
+```
+```{r}
+head(marking_geo)
+
+```
+
+
+Kendall's rank correlation between analytic case marking frequencies and geographic variables.
+
+
+```{r}
+cor.test(marking_geo$Freq.NA...ALL,marking_geo$LONGITUDE, method = c("kendall"))
+cor.test(marking_geo$Freq.NA...ALL,marking_geo$LATITUDE, method = c("kendall"))
+cor.test(marking_geo$Freq.NA...ALL,marking_geo$Altitude, method = c("kendall"))
+cor.test(marking_geo$Freq.NA...ALL,marking_geo$DIST_city, method = c("kendall"))
+
+```
+
+
+The map presenting the areal distribution of the analytic case marking in IO and POSS:
+
+
+```{r, fig.width=8, fig.height=4}
+marking_map
+```
+
+
+#### Post-positive demonstratives:
+
+
+```{r, include=FALSE}
+ppd_geo = read.csv('2_ppd_geo.csv', sep = ",", header = TRUE, na.strings = "")
+
+# the dependent variable is not normally distributed
+plot(density(ppd_geo$art_freq))
+shapiro.test(ppd_geo$art_freq)
+
+# map 2
+ppd_map_pal = pal <- colorBin(
+  palette = "black",
+  domain = ppd_geo$art_freq)
+ppd_map <- leaflet(ppd_geo) %>%
+  addProviderTiles(providers$Stamen.Toner) %>%
+  addCircles(lng=~LONGITUDE, lat=~LATITUDE, 
+             radius = ppd_geo$art_freq*40, 
+             color = "Black",
+             label = ~LOCATION)
+
+```
+```{r}
+head(ppd_geo)
+```
+
+
+Kendall's rank correlation between post-positive demonstatives frequencies and geographic variables.
+
+
+```{r}
+cor.test(ppd_geo$art_freq, ppd_geo$LONGITUDE, method = c("kendall"))
+cor.test(ppd_geo$art_freq, ppd_geo$LATITUDE, method = c("kendall"))
+cor.test(ppd_geo$art_freq, ppd_geo$Altitude, method = c("kendall"))
+cor.test(ppd_geo$art_freq, ppd_geo$DIST_city, method = c("kendall"))
+```
+
+
+The map presenting the areal distribution of the post-positive demonstatives:
+
+
+```{r, fig.width=8, fig.height=4}
+ppd_map
+```
+
+
+#### Particle SI:
+
+
+```{r, include=FALSE}
+si_geo = read.csv('3_si_geo.csv', sep = "\t", header = TRUE, na.strings = "")
+
+# the dependent variable is not normally distributed
+plot(density(si_geo$Normalized.FREQ.of..SI.))
+shapiro.test(si_geo$Normalized.FREQ.of..SI.)
+
+# map 3
+si_map_pal = pal <- colorNumeric(
+  palette = "black",
+  domain = si_geo$Normalized.FREQ.of..SI.)
+si_map <- leaflet(si_geo) %>%
+  addProviderTiles(providers$Stamen.Toner) %>%
+  addCircles(lng=~LONGITUDE, lat=~LATITUDE, 
+             radius = si_geo$Normalized.FREQ.of..SI.*700, 
+             color = "Black",
+             label = ~LOCATION)
+
+
+```
+```{r}
+head(si_geo)
+```
+
+
+Kendall's rank correlation between particle 'si' frequencies and geographic variables.
+
+
+```{r}
+cor.test(si_geo$Normalized.FREQ.of..SI., si_geo$LONGITUDE, method = c("kendall"))
+cor.test(si_geo$Normalized.FREQ.of..SI., si_geo$LATITUDE, method = c("kendall"))
+cor.test(si_geo$Normalized.FREQ.of..SI., si_geo$Altitude, method = c("kendall"))
+cor.test(si_geo$Normalized.FREQ.of..SI., si_geo$DIST_city, method = c("kendall"))
+
+```
+
+
+The map presenting the areal distribution of the particle 'si':
+
+
+```{r, fig.width=8, fig.height=4}
+si_map
+```
+
+
+#### Auxiliary omission in the perfect tense:
+
+
+```{r, include=FALSE}
+aux_geo = read.csv('4_aux_geo.csv', sep = ",", header = TRUE, na.strings = "")
+
+# the dependent variable is not normally distributed
+plot(density(aux_geo$no_aux))
+shapiro.test(aux_geo$no_aux)
+
+# map 4
+aux_map_pal = pal <- colorBin(
+  palette = "black",
+  domain = aux_geo$no_aux)
+aux_map <- leaflet(aux_geo) %>%
+  addProviderTiles(providers$Stamen.Toner) %>%
+  addCircles(lng=~LONGITUDE, lat=~LATITUDE, 
+             radius = aux_geo$no_aux*10, 
+             color = "Black",
+             label = ~LOCATION)
+```
+```{r}
+head(aux_geo)
+```
+
+
+Kendall's rank correlation between Auxiliary omission in the perfect tense frequencies and geographic variables.
+
+
+```{r}
+cor.test(aux_geo$no_aux, aux_geo$LONGITUDE, method = c("kendall"))
+cor.test(aux_geo$no_aux, aux_geo$LATITUDE, method = c("kendall"))
+cor.test(aux_geo$no_aux, aux_geo$Altitude, method = c("kendall"))
+cor.test(aux_geo$no_aux, aux_geo$DIST_city, method = c("kendall"))
+```
+
+
+The map presenting the areal distribution of the auxiliary omission in the perfect tense:
+
+
+```{r, fig.width=8, fig.height=4}
+aux_map
+```
+
+### Analysis of the socio-demographic factors
+
+What follows is the correlation of the linguistic frequencies with socio-demographic variables (age, gender). For the analysis of the geographic variables, frequency values have been aggregated for each location. The dependant variables is coninuous, while the geographic variables are binary. The dependant variable in all analyses except PPD do not have normal distribution, so Wilcoxon Rank Sum test was used, while for PPD, we used Pearson's rank correlation.
+
+
+#### Marking of indirect object and possessor:
+
+(see file 1_marking_socio_all.csv)
+
+
+```{r include=FALSE}
+marking_soc_all = read.csv('1_marking_socio_all.csv', sep = "\t", header = TRUE, na.strings = "")
+
+marking_age = marking_soc_all[c("Informant", "N.of.NA.Oblq", "N.of.DAT", "ALL..IO.POSS.", "Freq.NA...ALL", "Freq.DAT...ALL", "AGE")]
+marking_age = na.omit(marking_age)
+
+# the dependent variable is not normally distributed
+plot(density(marking_age$Freq.NA...ALL))
+shapiro.test(marking_age$Freq.NA...ALL)
+
+
+marking_age$AGE = revalue(as.factor(marking_age$AGE), c("1"="OLD", "2"="YOUNG"))
+marking_age_plot = ggplot(data=marking_age)+
+  geom_boxplot(aes(x=AGE, y=Freq.NA...ALL, fill = AGE))+
+  labs(title = "Analytic case marking", x = NULL, y = "Normalized freguency")+
+  theme_light() +
+  scale_fill_manual(values = c("grey89", 'grey48'))+
+  theme(axis.text = element_text(size = 15), 
+        axis.title = element_text(size = 20),
+        legend.title = element_text(size = 20),
+        legend.position = "none", title = element_text(size = 20))
+
+
+
+marking_gender = marking_soc_all[c("Informant", "N.of.NA.Oblq", "N.of.DAT", "ALL..IO.POSS.", "Freq.NA...ALL", "Freq.DAT...ALL", "Gender")]
+marking_gender = na.omit(marking_gender)
+
+# the dependent variable is not normally distributed
+plot(density(marking_gender$Freq.NA...ALL))
+shapiro.test(marking_gender$Freq.NA...ALL)
+
+marking_gender$Gender = revalue(as.factor(marking_gender$Gender), c("1"="FEMALE", "2"="MALE"))
+marking_gender_plot = ggplot(data=marking_gender)+
+  geom_boxplot(aes(x=Gender, y=Freq.NA...ALL, fill = Gender))+
+  labs(title = "Analytic case marking", x = NULL, y = "Normalized freguency")+
+  theme_light() +
+  scale_fill_manual(values = c("grey89", 'grey48'))+
+  theme(axis.text = element_text(size = 15), 
+        axis.title = element_text(size = 20),
+        legend.title = element_text(size = 20),
+        legend.position = "none", title = element_text(size = 20))
+
+```
+
+
+Analytic marking and age:
+
+
+```{r}
+head(marking_age)
+```
+
+
+Mann–Whitney test used to compare the distribution accross OLD and YOUNG speakers.
+
+
+```{r, warning=FALSE}
+wilcox.test(Freq.NA...ALL ~ AGE, data = marking_age)
+```
+
+
+Analytic marking and gender:
+
+
+```{r}
+head(marking_gender)
+```
+
+
+Mann–Whitney test used to compare the distribution accross MALE and FEMALE speakers.
+
+
+```{r}
+wilcox.test(Freq.NA...ALL ~ Gender, data = marking_gender)
+```
+
+#### Post-positive demonstratives:
+
+(see files 2_PPD_age.csv and 2_PPD_gender.csv)
+
+```{r, include=FALSE}
+ppd_age = read.csv('2_PPD_age.csv', sep = '\t', header = TRUE, stringsAsFactors = TRUE)
+
+# the dependent variable is not normally distributed
+plot(density(ppd_age$NORM_ART))
+shapiro.test(ppd_age$NORM_ART)
+
+ppd_age_plot = ggplot(data=ppd_age)+
+  geom_boxplot(aes(x=AGE, y=NORM_ART, fill = AGE))+
+  labs(title = "Post-positive demonstratives", x = NULL, y = "Normalized freguency")+
+  theme_light() +
+  scale_fill_manual(values = c("grey89", 'grey48'))+
+  theme(axis.text = element_text(size = 15), 
+        axis.title = element_text(size = 20),
+        legend.title = element_text(size = 20),
+        legend.position = "none", title = element_text(size = 20))
+
+ppd_gender = read.csv('2_PPD_gender.csv', sep = '\t', header = TRUE, stringsAsFactors = TRUE)
+
+ppd_gender_plot = ggplot(data=ppd_gender)+
+  geom_boxplot(aes(x=GENDER, y=NORM_ART, fill = GENDER))+
+  labs(title = "Post-positive demonstratives", x = NULL, y = "Normalized freguency")+
+  theme_light() +
+  scale_fill_manual(values = c("grey89", 'grey48'))+
+  theme(axis.text = element_text(size = 15), 
+        axis.title = element_text(size = 20),
+        legend.title = element_text(size = 20),
+        legend.position = "none", title = element_text(size = 20))
+
+# the dependent variable is not normally distributed
+plot(density(ppd_gender$NORM_ART))
+shapiro.test(ppd_gender$NORM_ART)
+```
+
+
+Post-positive demonstratives and age:
+
+
+```{r}
+head(ppd_age)
+```
+
+
+Mann–Whitney test used to compare the distribution accross OLD and YOUNG speakers.
+
+
+```{r}
+wilcox.test(NORM_ART ~ OLD, data = ppd_age)
+```
+
+
+Post-positive demonstratives and gender:
+
+
+```{r}
+head(ppd_gender)
+```
+
+
+Mann–Whitney test used to compare the distribution accross MALE and FEMALE speakers.
+
+
+```{r}
+wilcox.test(NORM_ART ~ FEMALE, data = ppd_gender)
+
+```
+
+#### Particle SI:
+
+(see file 3_si_socio.csv)
+
+
+``` {r, include=FALSE}
+si_socio = read.csv("3_si_socio.csv", header = TRUE, sep = '\t', na.strings = 'NA')
+si_socio$Age = ifelse(si_socio$Age == 999, NA, si_socio$Age)
+si_socio$Gender = ifelse(si_socio$Gender == 999, NA, si_socio$Gender)
+
+
+si_age = na.omit(si_socio[c("Informant", "Age", "Normalized.FREQ.of..SI.")])
+
+# the dependent variable is not normally distributed
+plot(density(si_age$Normalized.FREQ.of..SI.))
+shapiro.test(si_age$Normalized.FREQ.of..SI.)
+
+si_age$Age = revalue(as.factor(si_age$Age), c("1"="OLD", "2"="YOUNG"))
+si_age_plot = ggplot(data=si_age)+
+  geom_boxplot(aes(x=Age, y=Normalized.FREQ.of..SI., fill = Age))+
+  labs(title = "Particle si", x = NULL, y = "Normalized freguency")+
+  theme_light() +
+  scale_fill_manual(values = c("grey89", 'grey48'))+
+  theme(axis.text = element_text(size = 15), 
+        axis.title = element_text(size = 20),
+        legend.title = element_text(size = 20),
+        legend.position = "none", title = element_text(size = 20))
+
+
+si_gender = na.omit(si_socio[c("Informant", "Gender", "Normalized.FREQ.of..SI.")])
+
+# the dependent variable is not normally distributed
+plot(density(si_gender$Normalized.FREQ.of..SI.))
+shapiro.test(si_gender$Normalized.FREQ.of..SI.)
+
+si_gender$Gender = revalue(as.factor(si_gender$Gender), c("1"="FEMALE", "2"="MALE"))
+si_gender_plot = ggplot(data=si_gender)+
+  geom_boxplot(aes(x=Gender, y=Normalized.FREQ.of..SI., fill = Gender))+
+  labs(title = "Particle si", x = NULL, y = "Normalized freguency")+
+  theme_light() +
+  scale_fill_manual(values = c("grey89", 'grey48'))+
+  theme(axis.text = element_text(size = 15), 
+        axis.title = element_text(size = 20),
+        legend.title = element_text(size = 20),
+        legend.position = "none", title = element_text(size = 20))
+
+```
+
+
+Particle 'si' and age:
+
+
+```{r}
+head(si_age)
+```
+
+
+Mann–Whitney test used to compare the distribution accross OLD and YOUNG speakers.
+
+
+```{r}
+wilcox.test(Normalized.FREQ.of..SI. ~ Age, data = si_age)
+```
+
+
+Particle 'si' and gender:
+
+
+```{r}
+head(si_gender)
+```
+
+
+Mann–Whitney test used to compare the distribution accross MALE and FEMALE speakers.
+
+
+```{r}
+wilcox.test(Normalized.FREQ.of..SI. ~ Gender, data = si_gender)
+```
+
+#### Auxiliary omission in the perfect tense:
+
+(see files 4_aux_age.csv and 4_aux_gender.csv)
+
+
+```{r, include=FALSE}
+aux_age = read.csv('4_aux_age.csv', sep = '\t', header = TRUE, stringsAsFactors = TRUE, na.strings = "")
+aux_age = na.omit(aux_age)
+aux_age$AGE = as.numeric(revalue(aux_age$AGE, c("OLD"=1, "YOUNG"=2)))
+
+# the dependent variable is not normally distributed
+plot(density(aux_age$no_aux))
+shapiro.test(aux_age$no_aux)
+
+aux_age$AGE = revalue(as.factor(aux_age$AGE), c("1"="OLD", "2"="YOUNG"))
+aux_age_plot = ggplot(data=aux_age)+
+  geom_boxplot(aes(x=AGE, y=no_aux, fill = AGE))+
+  labs(title = "AUX omission in perfect", x = NULL, y = "Normalized freguency")+
+  theme_light() +
+  scale_fill_manual(values = c("grey89", 'grey48'))+
+  theme(axis.text = element_text(size = 15), 
+        axis.title = element_text(size = 20),
+        legend.title = element_text(size = 20),
+        legend.position = "none", title = element_text(size = 20))
+
+aux_gender = read.csv('4_aux_gender.csv', sep = '\t', header = TRUE, stringsAsFactors = TRUE, na.strings = "")
+aux_gender = na.omit(aux_gender)
+aux_gender$GEN = as.numeric(revalue(aux_gender$GEN, c("FEMALE"=1, "MALE"=2)))
+
+# the dependent variable is not normally distributed
+plot(density(aux_gender$no_aux))
+shapiro.test(aux_gender$no_aux)
+
+aux_gender$GEN = revalue(as.factor(aux_gender$GEN), c("1"="FEMALE", "2"="MALE"))
+aux_gender_plot = ggplot(data=aux_gender)+
+  geom_boxplot(aes(x=GEN, y=no_aux, fill = GEN))+
+  labs(title = "AUX omission in perfect", x = NULL, y = "Normalized freguency")+
+  theme_light() +
+  scale_fill_manual(values = c("grey89", 'grey48'))+
+  theme(axis.text = element_text(size = 15), 
+        axis.title = element_text(size = 20),
+        legend.title = element_text(size = 20),
+        legend.position = "none", title = element_text(size = 20))
+
+```
+
+
+Auxiliary omission in the perfect tense and age:
+
+
+```{r}
+head(aux_age)
+```
+
+
+Mann–Whitney test used to compare the distribution accross OLD and YOUNF speakers.
+
+
+```{r, warning=FALSE}
+wilcox.test(no_aux ~ AGE, data = aux_age)
+```
+
+
+Auxiliary omission in the perfect tense and gender:
+
+
+```{r}
+head(aux_gender)
+```
+
+
+Mann–Whitney test used to compare the distribution accross MALE and FEMALE speakers.
+
+
+```{r}
+wilcox.test(no_aux ~ GEN, data = aux_gender)
+```
+
+
+The ranges of values of the lingustic frequencies categorized according to age are shown in Figure 11.
+
+Figure 11: Age
+
+
+```{r, fig.width=20, fig.height=4.5}
+Figure11 = grid.arrange(marking_age_plot, ppd_age_plot, si_age_plot, aux_age_plot, nrow = 1)
+
+```
+
+
+The ranges of values of the lingustic frequencies categorized according to gender are shown in Figure 12.
+
+Figure 12: Gender
+
+
+```{r, fig.width=20, fig.height=4.5}
+Figure12 = grid.arrange(marking_gender_plot, ppd_gender_plot, si_gender_plot, aux_gender_plot, nrow = 1)
+
+```
