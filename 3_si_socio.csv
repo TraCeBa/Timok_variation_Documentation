@@ -1,0 +1,81 @@
+Informant	Number of 'si'	Number of verbs	Normalized FREQ of 'SI'	Location	Age	Gender
+TOR_C_0001_tagged.txt	48	996	4.819277108	Ošljane	1	1
+TOR_C_00019_tagged.txt	52	1687	3.082394784	Gornja Sokolovica	1	1
+TOR_C_0046_tagged.txt	55	1865	2.949061662	Marinovac	1	1
+TOR_C_00033_tagged.txt	53	1800	2.944444444	Balinac	1	1
+TOR_C_00013_tagged.txt	29	1030	2.815533981	Žukovac	1	1
+TOR_C_0038_tagged.txt	9	340	2.647058824	Janja	999	1
+TOR_C_0079_tagged.txt	28	1094	2.559414991	Staro Korito	999	1
+TOR_C_0050_tagged.txt	55	2323	2.367628067	Štipina	1	1
+TOR_C_0071_tagged.txt	25	1097	2.278942571	Glogovac	999	1
+TOR_C_0009_tagged.txt	30	1333	2.250562641	Jelašnica	1	1
+TOR_C_0093_tagged.txt	6	273	2.197802198	Knjaževac	2	1
+TOR_C_0049_tagged.txt	64	2934	2.181322427	Lepena	999	1
+TOR_C_0063_tagged.txt	7	331	2.114803625	Orešac	1	1
+TOR_C_0004_tagged.txt	18	860	2.093023256	Ćuštica	1	1
+TOR_C_0047_tagged.txt	19	924	2.056277056	Debelica	999	1
+TOR_C_00021_tagged.txt	7	350	2	Ravno Bučje	1	1
+TOR_C_0055_tagged.txt	23	1212	1.897689769	Crni Vrh	999	1
+TOR_C_0041_tagged.txt	53	2840	1.866197183	Donja Kamenica	1	1
+TOR_C_00032_tagged.txt	5	277	1.805054152	Jakovac	999	1
+TOR_C_0008_tagged.txt	14	795	1.761006289	Trnovac	1	1
+TOR_C_0094_tagged.txt	4	237	1.687763713	Knjaževac	2	1
+TOR_C_00030_tagged.txt	28	1725	1.623188406	Jakovac	1	1
+TOR_C_0040_tagged.txt	28	1874	1.494130203	Janja	999	1
+TOR_C_00034_tagged.txt	63	4320	1.458333333	Ponor	1	1
+TOR_C_0003_tagged.txt	23	1587	1.449275362	Balinac	1	1
+TOR_C_00011_tagged.txt	28	1938	1.444788442	Trgovište	1	1
+TOR_C_00028_tagged.txt	5	379	1.319261214	Inovo	1	1
+TOR_C_00025_tagged.txt	3	230	1.304347826	Koželj	1	1
+TOR_C_00010_tagged.txt	27	2071	1.303718011	Lepena	1	1
+TOR_C_00022_tagged.txt	2	154	1.298701299	Repušnica	1	1
+TOR_C_00031_tagged.txt	1	77	1.298701299	Jakovac	999	1
+TOR_C_0007_tagged.txt	14	1094	1.279707495	Trnovac	1	1
+TOR_C_00024_tagged.txt	44	3454	1.27388535	Bučje	1	1
+TOR_C_0077_tagged.txt	4	329	1.215805471	Lokva	999	1
+TOR_C_0037_tagged.txt	47	4020	1.169154229	Vlahovo	999	1
+TOR_C_0002_tagged.txt	19	1650	1.151515152	Drvnik	999	1
+TOR_C_0051_tagged.txt	13	1152	1.128472222	Aldinac	1	1
+TOR_C_0052_tagged.txt	15	1344	1.116071429	Pričevac	999	1
+TOR_C_0061_tagged.txt	15	1397	1.07372942	Krenta	999	1
+TOR_C_0054_tagged.txt	10	944	1.059322034	Crni Vrh	999	1
+TOR_C_0060_tagged.txt	9	852	1.056338028	Guševac	999	1
+TOR_C_0076_tagged.txt	10	1020	0.980392157	Lokva	999	1
+TOR_C_00029_tagged.txt	19	1967	0.965937977	Inovo	999	1
+TOR_C_0042_tagged.txt	13	1359	0.956585725	Jalovik Izvor	999	1
+TOR_C_00015_tagged.txt	7	734	0.953678474	Žlne	999	1
+TOR_C_0064_tagged.txt	10	1219	0.820344545	Petruša	1	1
+TOR_C_0053_tagged.txt	14	1721	0.813480535	Vlahovo	999	1
+TOR_C_00023_tagged.txt	15	2050	0.731707317	Šesti Gabar	1	1
+TOR_C_00020_tagged.txt	19	2911	0.652696668	Mali Izvor	1	1
+TOR_C_00016_tagged.txt	16	2648	0.604229607	Vasilj	999	1
+TOR_C_0073_tagged.txt	6	1044	0.574712644	Gradište	999	1
+TOR_C_0006_tagged.txt	1	177	0.564971751	Novo Korito	1	1
+TOR_C_0045_tagged.txt	16	2847	0.561995083	Minićevo	999	1
+TOR_C_0005_tagged.txt	4	1032	0.387596899	Gornje Zuniče	1	1
+TOR_C_0059_tagged.txt	2	591	0.338409475	Guševac	999	1
+TOR_C_00012_tagged.txt	2	687	0.291120815	Žukovac	1	1
+TOR_C_0072_tagged.txt	1	480	0.208333333	Leskovac	999	1
+TOR_C_00027_tagged.txt	1	833	0.120048019	Kandalica	999	1
+TOR_C_0057_tagged.txt	3	245	1.224489796	Gabrovnica	999	2
+TOR_C_0092_tagged.txt	3	246	1.219512195	Knjaževac	2	2
+TOR_C_0062_tagged.txt	14	1578	0.887198986	Orešac	999	2
+TOR_C_0056_tagged.txt	4	490	0.816326531	Gabrovnica	999	2
+TOR_C_0058_tagged.txt	2	269	0.743494424	Gabrovnica	999	2
+TOR_C_0086_tagged.txt	9	1725	0.52173913	Balanovac	999	2
+TOR_C_0084_tagged.txt	1	192	0.520833333	Drenovac	1	2
+TOR_C_0080_tagged.txt	8	2047	0.390815828	Borovac	999	2
+TOR_C_0075_tagged.txt	3	926	0.323974082	Balta Berilovac	1	2
+TOR_C_0096_tagged.txt	1	541	0.184842884	Knjaževac	2	2
+TOR_C_0089_tagged.txt	39	698	5.58739255	Drenovac	999	999
+TOR_C_0068_tagged.txt	8	407	1.965601966	Stara Kalna	999	999
+TOR_C_0090_tagged.txt	9	501	1.796407186	Drenovac	999	999
+TOR_C_0082_tagged.txt	16	999	1.601601602	Zorunovac	999	999
+TOR_C_0048_tagged.txt	16	1002	1.596806387	Šarbanovac	999	999
+TOR_C_00018_tagged.txt	13	1082	1.201478743	Drečinovac	999	999
+TOR_C_0069_tagged.txt	10	1009	0.991080278	Stara Kalna	999	999
+TOR_C_0067_tagged.txt	10	1014	0.986193294	Rgošte	999	999
+TOR_C_0091_tagged.txt	4	561	0.713012478	Drenovac	999	999
+TOR_C_0066_tagged.txt	11	1789	0.614868642	Radičevac	999	999
+TOR_C_0070_tagged.txt	8	1784	0.448430493	Vrbica	1	999
+TOR_C_0083_tagged.txt	8	2416	0.331125828	Selačka	1	999

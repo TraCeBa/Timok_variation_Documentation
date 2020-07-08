@@ -1,0 +1,9 @@
+"","order_si","verb_si","count_si","percent_si"
+"1","si+V","si+V",451,48.18
+"2","si+V","si+PPART",143,15.28
+"3","si+V","si+NEG+V",6,0.64
+"4","si+V","si+AUX+PPART",6,0.64
+"5","V+si","V+si",240,25.64
+"6","V+si","PPART+si",67,7.16
+"7","V+si","NEG+Vsi+",5,0.53
+"8","V+si","PPART+AUX+si",18,1.92
