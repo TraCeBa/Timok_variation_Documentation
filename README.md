@@ -3,7 +3,7 @@
 
 This repository contains R documentation for the quantitative analysis described inthe paper "Under the magnifying glass. Dimensions of variation in the contemporary Timok variety".
 
-The source code is written as R markdown file, stored in the file R_documentation.Rmd. The readable version of this file is either the PDF output (R_documentation.pdf), shich can be opened locally, or the HTML output (R_documentation.html) which can be opened in an Internet browser or accessed online [here](https://rpubs.com/tevuko/636831).
+The source code is written as R markdown file, stored in the file R_documentation.Rmd. The readable version of this file is either the PDF output (R_documentation.pdf), which can be opened directly here or locally, as well as the HTML output (R_documentation.html) which can be opened in an Internet browser or accessed online [here](https://rpubs.com/tevuko/636831).
 
 The directory contains the following files:
 
