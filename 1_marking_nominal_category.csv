@@ -1,0 +1,19 @@
+"","CASE_NOM_CAT_TYPE","CASE_NOM_CAT_CAT","CASE_NOM_CAT_FORM","CASE_NOM_CAT_values"
+"1","Type of N","Proper","NA+OBL",17.66
+"2","Type of N","Common","NA+OBL",5.64
+"3","Type of N","Proper","DAT",0.81
+"4","Type of N","Common","DAT",0.37
+"5","Gender","M","NA+OBL",56.54
+"6","Gender","F","NA+OBL",96.26
+"7","Gender","N","NA+OBL",33.21
+"8","Gender","M","DAT",6.74
+"9","Gender","F","DAT",2.85
+"10","Gender","N","DAT",0
+"11","Number","SG","NA+OBL",77.68
+"12","Number","PL","NA+OBL",40.87
+"13","Number","SG","DAT",4.33
+"14","Number","PL","DAT",3.83
+"15","Animacy","Inanimate","NA+OBL",0.32
+"16","Animacy","Animate","NA+OBL",13.32
+"17","Animacy","Inanimate","DAT",0.08
+"18","Animacy","Animate","DAT",0.79

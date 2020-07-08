@@ -1,0 +1,13 @@
+""	"Function"	"Type_of_marking"	"POS"	"Values"
+"1"	"IO"	"NA+OBL"	"Noun"	43.61
+"2"	"IO"	"NA+OBL"	"Pronoun"	14.83
+"3"	"IO"	"NA+OBL"	"Other"	8.57
+"4"	"IO"	"DAT"	"Noun"	4.1
+"5"	"IO"	"DAT"	"Pronoun"	9.01
+"6"	"IO"	"DAT"	"Other"	0.86
+"7"	"POSS"	"NA+OBL"	"Noun"	26.43
+"8"	"POSS"	"NA+OBL"	"Pronoun"	8.67
+"9"	"POSS"	"NA+OBL"	"Other"	2.99
+"10"	"POSS"	"DAT"	"Noun"	0.13
+"11"	"POSS"	"DAT"	"Pronoun"	2.17
+"12"	"POSS"	"DAT"	"Other"	0
