@@ -8,7 +8,7 @@ The directory contains the following files:
 * R markdown (.Rmd) file with all the procedures and references to the files containing quantitative data used in the analyses
 * .csv files containing quantitative data resulting from the corpus analyses used in the study
 * .xlsx files containing examples and quantitative data resulting from the corpus analyses used in the study
-* HTML output of the R markdown file
+* HTML output of the R markdown file (also available at https://rpubs.com/tevuko/636831)
 * PDF output of the R markdown file
 
 Note that some pieces of code have been hidden from the output files to improve readability. Full code is available in the .Rmd file.
