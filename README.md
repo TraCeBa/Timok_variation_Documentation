@@ -3,12 +3,14 @@
 
 This repository contains R documentation for the quantitative analysis described inthe paper "Under the magnifying glass. Dimensions of variation in the contemporary Timok variety".
 
+The source code is written as R markdown file, stored in the file R_documentation.Rmd. The readable version of this file is either the PDF output (R_documentation.pdf), shich can be opened locally, or the HTML output (R_documentation.html) which can be opened in an Internet browser or accessed online [here](https://rpubs.com/tevuko/636831).
+
 The directory contains the following files:
 
 * R markdown (.Rmd) file with all the procedures and references to the files containing quantitative data used in the analyses
 * .csv files containing quantitative data resulting from the corpus analyses used in the study
 * .xlsx files containing examples and quantitative data resulting from the corpus analyses used in the study
-* HTML output of the R markdown file (also available at https://rpubs.com/tevuko/636831)
+* HTML output of the R markdown file (also available [here](https://rpubs.com/tevuko/636831))
 * PDF output of the R markdown file
 
 Note that some pieces of code have been hidden from the output files to improve readability. Full code is available in the .Rmd file.
