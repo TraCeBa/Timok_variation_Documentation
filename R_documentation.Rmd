@@ -2,6 +2,8 @@
 title: |-
   Under the magnifying glass. Dimensions of variation in the contemporary Timok variety
   Documentation
+author: Teodora Vuković
+date:   08.07.2020
 output:
   html_document: default
   word_document: default
