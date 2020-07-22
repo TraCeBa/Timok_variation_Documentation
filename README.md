@@ -12,6 +12,7 @@ The directory contains the following files:
 * .xlsx files containing examples and quantitative data resulting from the corpus analyses used in the study
 * HTML output of the R markdown file (also available [here](https://rpubs.com/tevuko/636831))
 * PDF output of the R markdown file
+* preamble.tex file necessary for generating the PDF output
 
 Note that some pieces of code have been hidden from the output files to improve readability. Full code is available in the .Rmd file.
 
