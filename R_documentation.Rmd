@@ -3,11 +3,17 @@ title: |-
   Under the magnifying glass. Dimensions of variation in the contemporary Timok variety
   Documentation
 author: Teodora Vuković
-date:   08.07.2020
+date: "`r Sys.Date()`"
 output:
-  html_document: default
-  word_document: default
-  pdf_document: default
+  pdf_document:
+    toc: true
+    toc_depth: 3
+    includes: 
+      in_header: preamble.tex
+  word_document:
+    toc: true
+  html_document:
+    toc: true
 ---
 
 ```{r setup, include=FALSE}
@@ -41,14 +47,14 @@ The manuscript deals with morphosyntactic and socio-geographic variation in a So
 
 - marking of indirect object and possessor 
 - post-positive demonstratives
-- dative reflexive si as a particle
+- dative reflexive *si* as a particle
 - auxiliary omission in the perfect tense 
 
 The present document follows the analysis presented in the paper and provides data and methodological processes used. It thus orderly refers to the sections and subsections from the manuscript.
 
-For the purposes of the present paper, corpus files were searched using Python. The published online version of the corpus will provide different search options.
+For the purposes of the present paper, corpus files were searched using Python. The published online version of the corpus might provide different search options. Should the search be repeated on the uploaded version of the corpus, due to potential fine-grained changes in the data, the tendencies presented in the paper will not change, but the absolute numbers might, as well as the overall number of examples.
 
-Note that in this document, some pieces of code have been hidden to make it more readable. The entire code is available in the source script with the .Rmd extension.
+Note that in the present document, some pieces of code have been hidden to make it more readable. The entire code is available in the source script with the .Rmd extension.
 
 ## 3. Facets of variation
 
@@ -58,34 +64,34 @@ Note that in this document, some pieces of code have been hidden to make it more
 
 The analysis is based on the following variables:
 
-- Dependent variable: type of marking (na + general oblique case vs. inflectional dative)
+- Dependent variable: type of marking (*na* + general oblique case vs. inflectional dative)
 - Independent variables: function (indirect object, possessor), part-of-speech (nouns, pronouns, ‘other’), nominal categories (proper/common nouns, grammatical number, grammatical gender, animacy)
 
-The data used in the analysis is stored in the file 1_data.xlsx. The data was extracted from the corpus semi-automatically. Firstly Python script was used to extract all the instances of dative or "NA" + noun/pronoun patterns.
+The data used in the analysis is stored in the file 1_data.xlsx. The data was extracted from the corpus semi-automatically. Firstly Python script was used to extract all the instances of dative or *na* + noun/pronoun patterns.
 
 00_IO_na_search.py
 
 00_IO_dative_search.py
 
-Noun forms were approximated using word endings for inflected and non-inflected forms. For pronouns, a list of all pronominal forms was used (see in scripts). Context where IO is expected to appear is approximated with a list of verbs requiring an IO (see in scripts).
+Noun forms were approximated using word endings for inflected and non-inflected forms. For pronouns, a list of all pronominal forms was used (see in scripts). The list of verbs was added as an additional means to enable better search and ensure that particular verbs will be retrieved (see in scripts). The obtained examples of IO are not just based on the pre-defined list of verbs, other contexts were  included as well.
 
-This data was then filtered manually example, by example. The final list of examples was labelled manually for the perametres included in the analysis. The filtered data was further segmented by focusing on particular criteria for each analysis. 
+This data was then filtered manually example, by example. The final list of examples was labelled manually for the perametres included in the analysis. The filtered data was further segmented by focusing on particular criteria for each analysis. The overall number of examples is 895.
 
-Frequencies of na ‘on’ + general oblique case and synthetic dative are normalized with regard to the overall number of relevant parts of speech and nominal categories retrieved from the corpus and multiplied with 10.000 in case of the PoS, gender and number, but with 1.000 in case of type of noun and animacy.
+Frequencies of *na* ‘on’ + general oblique case and inflectional dative are normalized with regard to the overall number of relevant parts of speech and nominal categories retrieved from the corpus and multiplied with 10,000 in case of the PoS, gender and number, but with 1,000 in case of type of noun and animacy.
 
 The file 1_marking_examples.xlsx is organized in sheets as follows:
 
-1. Case, PoS, Function - rows contain examples extracted from the corpus. Columns contain informtaion about Case, Function, PoS for each example (manually annotated) 
+1. Case, PoS, Function - rows contain examples extracted from the corpus. Columns contain information about Case, Function, PoS for each example (manually annotated) 
 2. IO PoS RAW - data from Case, PoS, Function, only for IO. It contains also a summary table with absolute frequencies regarding PoS.
-3. POSS PoS RAW - data from Case, PoS, Function, only for POSS It contains also a summary table with absolute frequencies regarding PoS.
-4. Freq PoS tablss - repeated summary tables from  zbirne tabele 2. IO PoS RAW and 3. POSS PoS RAW, with calculated percentages, normalized per total number of the respective caegory.
+3. POSS PoS RAW - data from Case, PoS, Function, only for POSS. It contains also a summary table with absolute frequencies regarding PoS.
+4. Freq PoS tabele - repeated summary tables from 2. IO PoS RAW and 3. POSS PoS RAW, with calculated percentages, normalized per total number of the respective category.
 5. Nominal categories RAW data - (for nouns only!) rows contain examples extracted from the corpus. Columns contain informtaion about nominal categories: Type of Noun (proper, common), Gender (masculine, feminine, neuter), Number (singular, plural), Animacy (animate, inanimate). 
 6. % for Nominal categories - Summary table based on data from 5. Nominal categories RAW data, with percentages and normalized frequencies per total number of nouns of each type/gender/number/animacy. The data for Type of Nouns is marked in yellow. The final table used for Figure 3 is highlited in red.
 7. corpus_PoS_frequencies - frequencies extracted from the corpus for each PoS and nominal categories. The last row shows total frequency for each column.
 
 In what follows analyses are presented as they appear in the paper.
 
-Chi square test is used to compare analysed observations of analytic vs. synthetic marking in the whole sample. The test is performed using the data in the file 1_analytic_synthetic_marking.csv' which contains all examples of IO and POSS extracted from the corpus, labelled for the type of marking: analytic=0, synthetic=1 (from the file 1_data.xlsx, sheet 1. Case, PoS, Function, column Case). The values were relabelled below 0="NA+OBL", 1="DAT" here for clearer representation.
+Chi square test is used to compare analysed observations of analytic vs. inflectional marking in the whole sample. The test is performed using the data in the file 1_analytic_synthetic_marking.csv' which contains all examples of IO and POSS extracted from the corpus, labelled for the type of marking: analytic=0, inflectional=1 (from the file 1_data.xlsx, sheet 1. Case, PoS, Function, column Case). The values were relabelled below 0="NA+OBL", 1="DAT" here for clearer representation.
 
 
 ```{r include=FALSE}
@@ -108,7 +114,7 @@ chisq.test(analytic_synthetic_marking_chisq)
 ```
 
 
-Chi-square test is used to compare frequencies of analytic and synthetic type of marking with regard to their function (indirect object, possessive).
+Chi-square test is used to compare frequencies of analytic and inflectional type of marking with regard to their function (indirect object, possessive).
 
 
 ```{r include=FALSE}
@@ -141,16 +147,17 @@ Figure1 = ggplot(marking_type_function, aes(fill=marking_function, y=marking_per
 ```{r }
 marking_type_function
 ```
-```{r, fig.height=3, fig.width=4, fig.cap="Figure 1: Type of marking: overall and per functions"}
+```{r, fig.height=3, fig.width=4, fig.cap="Figure 1 - Type of marking: overall and per functions"}
 Figure1
 ```
 
 
-The data for analytic and syntetic marking was sorted based on part-of-speech categories. Frequencies were extracted from the 1_data.xlsx file and presented in the file 1_marking_function_pos.csv. 
+The data for analytic and inflectional marking was sorted based on part-of-speech categories. Frequencies were extracted from the 1_data.xlsx file and presented in the file 1_marking_function_pos.csv. 
 
 
 ```{r include=FALSE}
-marking_function_pos = read.csv('1_marking_function_pos.csv', header = TRUE, sep = "\t")
+marking_function_pos = read.csv('1_marking_function_pos.csv', header = TRUE, sep = "\t", stringsAsFactors = TRUE)
+marking_function_pos$POS = factor(marking_function_pos$POS, levels = c("Noun", "Pronoun", "Other"))
 ```
 ```{r }
 head(marking_function_pos)
@@ -188,6 +195,9 @@ Data for IO was categorized based on nominal categories (type of noun, gender, n
 ```{r include=FALSE}
 
 marking_nom_cat=read.csv('1_marking_nominal_category.csv',sep = ',', stringsAsFactors = TRUE, header = TRUE)
+marking_nom_cat$CASE_NOM_CAT_TYPE = factor(marking_nom_cat$CASE_NOM_CAT_TYPE, levels = c("Type of N", "Gender", "Number", "Animacy"))
+marking_nom_cat$CASE_NOM_CAT_CAT = factor(marking_nom_cat$CASE_NOM_CAT_CAT, levels = c("Proper", "Common", "M", "F", "N", "SG", "PL", "Animate", "Inanimate"))
+
 
 Figure3 = ggplot(marking_nom_cat, 
                               aes(y=CASE_NOM_CAT_values, x=CASE_NOM_CAT_CAT)) + 
@@ -217,12 +227,17 @@ Figure3
 
 In order to identify the distribution of different forms of PPD (nominative/unmarked vs. accusative/oblique, as well based on gender), nouns containing PPD were compared against bare nouns. The comparison regarding gender includes all nouns, while the comparison concerning case takes into account only nouns of the grammatical feminine gender ending in -a and masculine animate nouns ending in a consonant (regardless of the syntactic position). The following variables were used:
 
-- Dependent variable: frequency of the nouns containing PPD and bare nouns (absolute and normalized per 10000 nouns)
+- Dependent variable: frequency of the nouns containing PPD and bare nouns (absolute and normalized per 10,000 nouns)
 - Independent variables: gender of nouns (masculine ending in consonant, feminine ending in -a, neuter), case of nouns (nominative/unmarked and oblique/accusative singular)
 
-Words with articles were extracted from the corpus based on their form. The resulting list contains 817 types of all PoS categories (1313 tokens). These words were manually annotated for PoS categories for the purposes of the analysis, because some PoS labels had been initially wrong. The examples of words containing PPD are stored in the file 2_PPD_examples.xlsx.
+Words with PPD were extracted from the corpus based on their form. The analysis in the present study involved nouns only, as explained in the manuscript. The resulting list of nouns carrying a PPD contains 1,182 tokens (in the corpus there is a total of 1,131 words of all PoS categories carrying a PPD). These words were manually annotated for PoS categories for the purposes of the analysis, because some PoS labels retreived from the corpus had been initially wrong. The examples of words containing PPD are stored in the file 2_PPD_examples.xlsx.
 
-The analysis in the present study involved nouns only, as explained in the manuscript For the analysis of nouns of all three genders, the data was extracted and categorized using PoS tags. The extraction of nouns of grammatical feminine gender (feminine and masculine nouns ending in -a) and animate masculine nouns ending in consonant was based on manually selected lists of lemmas of each category. The lists were created by etracting all feminine and masculine nouns endiing in -a and removing the incorrect instances. The feminine group includes the first 1337 correct lemmas, because the proportion of unwanted results became much bigger afterwards. Both masculine groups contain all lemmas retreived from the corpus fitting the criteria. Results regarding case were obtained using the lists of lemmas and the morphological form. The lists of lemmas are available in files 2_PPD_masculine_nouns_in_a.txt, 2_PPD_masculine_animate_nouns_in_consonant.txt, 2_PPD_feminine_nouns_in_a.txt. The number of elements in each list is shown below (not included in the manuscript).
+For the analysis of nouns based on gender genders, the data was categorized using PoS tags.
+
+For the analysis of gender and case inflection, the extraction of nouns of different genders was done by using lists of lemmas from each of the categories: 
+- grammatical feminine gender (feminine and masculine nouns ending in -a)
+- animate masculine nouns ending in consonant
+The lists were made by first automatically extracting all nouns of each gender from the corpus by using PoS tags and forms, and then manually selecting only correct instances. The feminine group includes the first 1337 correct lemmas, sorted by frequency. Both masculine groups contain all lemmas retreived from the corpus fitting the criteria. The lists of lemmas are available in files 2_PPD_masculine_nouns_in_a.txt, 2_PPD_masculine_animate_nouns_in_consonant.txt, 2_PPD_feminine_nouns_in_a.txt. The number of elements in each list is shown below (not included in the manuscript).
 
 
 ``` {r include=FALSE}
@@ -234,7 +249,7 @@ lists_of_lemmas_gender
 ``` 
 
 
-All nouns were compared for gender, categorized based on gender and the presence of PPD. The total number of bare nouns of all genders is 74769. The total number of nouns with PPD is 1182. The data used in the analysis is presented in the file 2_PPD_gender_absfreq.csv.
+All nouns were compared for gender, categorized based on gender and the presence of PPD. The total number of bare nouns of all genders is 74,769. The total number of nouns with PPD is 1,182. The data used in the analysis is presented in the file 2_PPD_gender_absfreq.csv.
 
 
 ``` {r include=FALSE}
@@ -283,7 +298,7 @@ chisq.test(PPD_gen_all)
 ``` 
 
 
-Data used for the analysis of the distribution of case marking has been categorized based on the presence of PPD (bare vs. with PPD) and case inflections. The same cateorization was was performed for masculine and feminine nouns separately.
+Data used for the analysis of the distribution of case marking has been categorized based on the presence of PPD (bare vs. with PPD) and case inflections. The same categorization was performed for masculine and feminine nouns separately.
 
 
 ```{r include=FALSE}
@@ -318,7 +333,7 @@ ppd_mosaic_all = ggplot(data = ppd_case_gender) +
 
 ppd_mosaic_masc = ggplot(data = ppd_case_gender) +
   geom_mosaic(aes(weight = Masculine_animate,x = product(Case, PPD), fill=NULL))+
-  labs(title = "Feminine nouns", x =NULL, y = NULL) +
+  labs(title = "Masculine nouns", x =NULL, y = NULL) +
   theme_light() +
   theme(axis.text = element_text(size = 15), 
         axis.title = element_text(size = 15),
@@ -347,14 +362,12 @@ Figure5 = grid.arrange(ppd_mosaic_all, ppd_mosaic_masc, ppd_mosaic_fem, nrow = 1
 
 The analysis is based on the following variables:
 
-- Dependent variable: absolute and normalized frequency of the clitic si used non-pronominally (per 1,000 verbs)
-- Independent variables: properties of the verb (person and number, animacy, reflexivity, lexical type), variation in the syntactic patterns in the contact position between si and the verb
+- Dependent variable: absolute and normalized frequency of the particle *si* used non-pronominally (per 1,000 verbs)
+- Independent variables: properties of the verb (person and number, animacy, reflexivity, lexical type), variation in the syntactic patterns in the contact position between *si* and the verb
 
-The search was done semioutomatically. A python script was used to search for all the occurences of the word 'si' and some unwanted results were excluded (such as the forms of the 2nd person auxiliary, e.g. Ti si gledal. 'You were watching.'). The rest was removed manually, by checking each example. Each examples was annotated manually for the criteria described in the manuscript.
+The search was done semi-automatically. A python script was used to search for all the occurences of the word 'si' and some unwanted results were excluded (such as the forms of the 2nd person auxiliary, e.g. Ti *si* gledal. 'You were watching.'). The rest was removed manually, by checking each example. Each example was annotated manually for the criteria described in the manuscript. The 1,375 examples of the use of si were extracted from the corpus. Manually annotated data used in the analysis is shown in the file 3_si_examples.xlsx
 
-Manually annotated data used in the analysis is shown in the file XX.xlsx
-
-The frequency of particle SI categorized based on person and number is shown below (see file 3_si_person.csv).
+The frequency of particle *si* categorized based on person and number is shown below (see file 3_si_person.csv).
 
 
 ```{r include=FALSE}
@@ -377,12 +390,12 @@ Figure6 = ggplot(data=si_person, aes(x=si_person_labels, y=si_person_value, fill
         axis.title = element_text(size = 10),
         legend.title = element_text(size = 15))
 ```
-```{r, fig.height=3.5, fig.cap="Figure 6: Si particle frequency: Person and number of the verb" }
+```{r, fig.height=3.5, fig.cap="Figure 6: *Si* particle frequency: Person and number of the verb" }
 Figure6
 ```
 
 
-Frequency is compared on the basis of grammatical categories: animacy of the subject, reflexivity of the predicate, voice of the predicate.
+Frequency of the particle *si* is compared on the basis of grammatical categories: animacy of the subject, reflexivity of the predicate, voice of the predicate.
 
 Animacy (see file 4_si_animacy.csv):
 
@@ -463,7 +476,7 @@ si_voice_plot = ggplot(data=si_voice, aes(x=si_voice_label, y=si_voice_value)) +
 Figure 7 shows the frequencies of the occurrences of the particle 'si' categorized based om the three linguistic features: animacy, reflexivity, voice.
 
 
-```{r, fig.height=3, fig.cap="Figure 7: Si particle frequency: Animacy, reflexivity, voice"}
+```{r, fig.height=3, fig.cap="Figure 7: *si* particle frequency: Animacy, reflexivity, voice"}
 Figure7 = grid.arrange(si_animacy_plot, si_refl_plot, si_voice_plot, nrow = 1)
 ```
 
@@ -487,7 +500,7 @@ Figure8 = ggplot(si_order, aes(y=percent_si, x=verb_si, fill = order_si)) +
         strip.text.x = element_text(size = 20),
         panel.spacing = unit(2, 'lines'))
 ```
-```{r , fig.width=15, fig.cap="Figure 8: The proportions of contact patterns between si and the verb"}
+```{r , fig.width=15, fig.cap="Figure 8: The proportions of contact patterns between *si* and the verb"}
 Figure8
 ```
 
@@ -495,14 +508,10 @@ Figure8
 
 The quantitative analysis of the use of the -AUX forms is based on the following variables:
 
-- The dependant variable: normalized (to the total number of the examples of the use of the perfect tense) frequency of the –AUX and +AUX forms per location. 
-- The independant variables: gender, age + several categorical linguistic variables: acpect, transitivity, lexical group. 
+- Dependant variable: normalized (to the total number of the examples of the use of the perfect tense) frequency of the –AUX and +AUX forms per location. 
+- Independant variables: gender, several categorical linguistic variables: aspect, transitivity, lexical group. 
 
-The automatic search for relevant examples in the Timok corpus made with a user Python scriptrequired all the clauses where perfect participle tense is used. These examples were automatically divided into three groups: clauses with –AUX  perfect forms,  clauses with +AUX  perfect forms and clauses with potential mood (the latter group was subsequently excluded from the analysis). 
-The data are presented in two tables. In the table "verb_timok.csv",  each observation represents texts from a single location. In cases, where there were several recordings from one location,  the scores were merged in one observation, assuming that every speaker from a single location represents the same local variety. The table contains the following columns (not all of the information was used in the present study, see in more detail in (Makarova 2021)): ID (recording ID), LOCATION (name of the village), LATITUDE, LONGITUDE,
-total (total number of examples), total_aux(total number of +AUX forms), dist_boarder (distance to the bulgarian border), no_aux (total number of -AUX forms), total_aux_prop (proportion of + AUX forms).
-In the  table "verb_tim_soc2.csv", every observation is a text from a single recording (i.e. the data from same locations are not merged in one observation) contains additional  data on age and gender of every informant.
-The table "gramm.csv" contains contingency table used for the chi-squared test of the categorical linguistic variables. 
+The automatic search for relevant examples in the Timok corpus made with a user Python scriptrequired all the clauses where perfect participle tense is used. These examples were automatically divided into three groups: clauses with –AUX  perfect forms,  clauses with +AUX  perfect forms and clauses with potential mood (the latter group was subsequently excluded from the analysis). From the total number of 13,233 examples of perfect tense, 8,343 (63.05%) are –AUX forms, 4,890 (36.95%) are +AUX forms.
 
 The file 4_overall_freq.csv shows the frequency of analysed examples of the perfect tense that display +AUX (total_aux) and -AUX (no_aux) pattern per transcript  (normalized per 1,000 occurrences of the perfect tense).
 
@@ -539,7 +548,7 @@ Figure9
 ```
 
 
-The total frequency of +AUX and -AUX pattern are presented below (see 4_aux_overall_chisq.csv):
+The total frequency of +AUX and -AUX pattern is presented below (see 4_aux_overall_chisq.csv):
 
 
 ``` {r, include=FALSE}
@@ -596,12 +605,7 @@ Figure10 = ggplot(gram2, aes(x = Variable, y = Value, fill = Perfect)) +
   expand_limits(y = 100) 
 
 ```
-
-
-Figure 10: Linguistic properties of -AUX and +AUX forms in Timok corpus (proportions)
-
-
-```{r}
+```{r, fig.cap="Figure 10: Linguistic properties of -AUX and +AUX forms in Timok corpus (proportions)", warning=FALSE}
 Figure10
 ```
 
@@ -654,9 +658,9 @@ chisq.test(gramm_table_lex)
 Analysis of social and geographic factors involved the dependent variables:
 
 - proportion of the analytic marking of the indirect object and the possessive per total examples analysed per location
-- normalized frequency of PPD per 1000 nouns per location
-- normalized frequency of particle SI per 1000 verbs
-- normalized frequency of AUX omission per 1000 cases of perfect tense
+- normalized frequency of PPD per 1,000 nouns per location
+- normalized frequency of particle *si* per 1,000 verbs
+- normalized frequency of AUX omission per 1,000 cases of perfect tense
 
 The independent variables regarding geographic distribution are:
  
@@ -866,7 +870,7 @@ aux_map
 
 ### Analysis of the socio-demographic factors
 
-What follows is the correlation of the linguistic frequencies with socio-demographic variables (age, gender). For the analysis of the geographic variables, frequency values have been aggregated for each location. The dependant variables is coninuous, while the geographic variables are binary. The dependant variable in all analyses except PPD do not have normal distribution, so Wilcoxon Rank Sum test was used, while for PPD, we used Pearson's rank correlation.
+What follows is the correlation of the linguistic frequencies with socio-demographic variables (age, gender). For the analysis of the geographic variables, frequency values have been aggregated for each location. The dependant variables is coninuous, while the geographic variables are binary. The dependant variables in all analyses except PPD do not have normal distribution, so Wilcoxon Rank Sum test was used, while for PPD, we used Pearson's rank correlation.
 
 
 #### Marking of indirect object and possessor:
@@ -927,7 +931,7 @@ head(marking_age)
 ```
 
 
-Mann–Whitney test used to compare the distribution accross OLD and YOUNG speakers.
+Wilcoxon Rank Sum test used to compare the distribution accross OLD and YOUNG speakers.
 
 
 ```{r, warning=FALSE}
@@ -943,7 +947,7 @@ head(marking_gender)
 ```
 
 
-Mann–Whitney test used to compare the distribution accross MALE and FEMALE speakers.
+Wilcoxon Rank Sum test used to compare the distribution accross MALE and FEMALE speakers.
 
 
 ```{r}
@@ -997,7 +1001,7 @@ head(ppd_age)
 ```
 
 
-Mann–Whitney test used to compare the distribution accross OLD and YOUNG speakers.
+Wilcoxon Rank Sum test used to compare the distribution accross OLD and YOUNG speakers.
 
 
 ```{r}
@@ -1013,7 +1017,7 @@ head(ppd_gender)
 ```
 
 
-Mann–Whitney test used to compare the distribution accross MALE and FEMALE speakers.
+Wilcoxon Rank Sum test used to compare the distribution accross MALE and FEMALE speakers.
 
 
 ```{r}
@@ -1078,7 +1082,7 @@ head(si_age)
 ```
 
 
-Mann–Whitney test used to compare the distribution accross OLD and YOUNG speakers.
+Wilcoxon Rank Sum test used to compare the distribution accross OLD and YOUNG speakers.
 
 
 ```{r}
@@ -1094,7 +1098,7 @@ head(si_gender)
 ```
 
 
-Mann–Whitney test used to compare the distribution accross MALE and FEMALE speakers.
+Wilcoxon Rank Sum test used to compare the distribution accross MALE and FEMALE speakers.
 
 
 ```{r}
@@ -1156,7 +1160,7 @@ head(aux_age)
 ```
 
 
-Mann–Whitney test used to compare the distribution accross OLD and YOUNF speakers.
+Wilcoxon Rank Sum test used to compare the distribution accross OLD and YOUNF speakers.
 
 
 ```{r, warning=FALSE}
@@ -1172,7 +1176,7 @@ head(aux_gender)
 ```
 
 
-Mann–Whitney test used to compare the distribution accross MALE and FEMALE speakers.
+Wilcoxon Rank Sum test used to compare the distribution accross MALE and FEMALE speakers.
 
 
 ```{r}
