@@ -1,19 +1,23 @@
 ---
-title: |-
+title:
   Under the magnifying glass. Dimensions of variation in the contemporary Timok variety
+subtitle:
   Documentation
 author: Teodora Vuković
 date: "`r Sys.Date()`"
 output:
+  html_document:
+    toc: true
+    # includes:
+    #   in_header: traceba_logo.html
+  word_document:
+    toc: true
   pdf_document:
     toc: true
     toc_depth: 3
     includes: 
-      in_header: preamble.tex
-  word_document:
-    toc: true
-  html_document:
-    toc: true
+      in_header: 
+        preamble.tex
 ---
 
 ```{r setup, include=FALSE}
