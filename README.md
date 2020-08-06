@@ -7,7 +7,7 @@ The source code is written as R markdown file, stored in the file R_documentatio
 
 The directory contains the following files:
 
-* R markdown (.Rmd) file with all the procedures and references to the files containing quantitative data used in the analyses
+* R markdown (.Rmd) file with all the quantitative procedures and references to the files containing quantitative data used in the analyses
 * .csv files containing quantitative data resulting from the corpus analyses used in the study
 * .xlsx files containing examples and quantitative data resulting from the corpus analyses used in the study
 * HTML output of the R markdown file (also available [here](https://rpubs.com/tevuko/636831))
