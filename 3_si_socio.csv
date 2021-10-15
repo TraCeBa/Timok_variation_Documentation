@@ -1,81 +1,93 @@
-Informant	Number of 'si'	Number of verbs	Normalized FREQ of 'SI'	Location	Age	Gender
-TOR_C_0001_tagged.txt	48	996	4.819277108	Ošljane	1	1
-TOR_C_00019_tagged.txt	52	1687	3.082394784	Gornja Sokolovica	1	1
-TOR_C_0046_tagged.txt	55	1865	2.949061662	Marinovac	1	1
-TOR_C_00033_tagged.txt	53	1800	2.944444444	Balinac	1	1
-TOR_C_00013_tagged.txt	29	1030	2.815533981	Žukovac	1	1
-TOR_C_0038_tagged.txt	9	340	2.647058824	Janja	999	1
-TOR_C_0079_tagged.txt	28	1094	2.559414991	Staro Korito	999	1
-TOR_C_0050_tagged.txt	55	2323	2.367628067	Štipina	1	1
-TOR_C_0071_tagged.txt	25	1097	2.278942571	Glogovac	999	1
-TOR_C_0009_tagged.txt	30	1333	2.250562641	Jelašnica	1	1
-TOR_C_0093_tagged.txt	6	273	2.197802198	Knjaževac	2	1
-TOR_C_0049_tagged.txt	64	2934	2.181322427	Lepena	999	1
-TOR_C_0063_tagged.txt	7	331	2.114803625	Orešac	1	1
-TOR_C_0004_tagged.txt	18	860	2.093023256	Ćuštica	1	1
-TOR_C_0047_tagged.txt	19	924	2.056277056	Debelica	999	1
-TOR_C_00021_tagged.txt	7	350	2	Ravno Bučje	1	1
-TOR_C_0055_tagged.txt	23	1212	1.897689769	Crni Vrh	999	1
-TOR_C_0041_tagged.txt	53	2840	1.866197183	Donja Kamenica	1	1
-TOR_C_00032_tagged.txt	5	277	1.805054152	Jakovac	999	1
-TOR_C_0008_tagged.txt	14	795	1.761006289	Trnovac	1	1
-TOR_C_0094_tagged.txt	4	237	1.687763713	Knjaževac	2	1
-TOR_C_00030_tagged.txt	28	1725	1.623188406	Jakovac	1	1
-TOR_C_0040_tagged.txt	28	1874	1.494130203	Janja	999	1
-TOR_C_00034_tagged.txt	63	4320	1.458333333	Ponor	1	1
-TOR_C_0003_tagged.txt	23	1587	1.449275362	Balinac	1	1
-TOR_C_00011_tagged.txt	28	1938	1.444788442	Trgovište	1	1
-TOR_C_00028_tagged.txt	5	379	1.319261214	Inovo	1	1
-TOR_C_00025_tagged.txt	3	230	1.304347826	Koželj	1	1
-TOR_C_00010_tagged.txt	27	2071	1.303718011	Lepena	1	1
-TOR_C_00022_tagged.txt	2	154	1.298701299	Repušnica	1	1
-TOR_C_00031_tagged.txt	1	77	1.298701299	Jakovac	999	1
-TOR_C_0007_tagged.txt	14	1094	1.279707495	Trnovac	1	1
-TOR_C_00024_tagged.txt	44	3454	1.27388535	Bučje	1	1
-TOR_C_0077_tagged.txt	4	329	1.215805471	Lokva	999	1
-TOR_C_0037_tagged.txt	47	4020	1.169154229	Vlahovo	999	1
-TOR_C_0002_tagged.txt	19	1650	1.151515152	Drvnik	999	1
-TOR_C_0051_tagged.txt	13	1152	1.128472222	Aldinac	1	1
-TOR_C_0052_tagged.txt	15	1344	1.116071429	Pričevac	999	1
-TOR_C_0061_tagged.txt	15	1397	1.07372942	Krenta	999	1
-TOR_C_0054_tagged.txt	10	944	1.059322034	Crni Vrh	999	1
-TOR_C_0060_tagged.txt	9	852	1.056338028	Guševac	999	1
-TOR_C_0076_tagged.txt	10	1020	0.980392157	Lokva	999	1
-TOR_C_00029_tagged.txt	19	1967	0.965937977	Inovo	999	1
-TOR_C_0042_tagged.txt	13	1359	0.956585725	Jalovik Izvor	999	1
-TOR_C_00015_tagged.txt	7	734	0.953678474	Žlne	999	1
-TOR_C_0064_tagged.txt	10	1219	0.820344545	Petruša	1	1
-TOR_C_0053_tagged.txt	14	1721	0.813480535	Vlahovo	999	1
-TOR_C_00023_tagged.txt	15	2050	0.731707317	Šesti Gabar	1	1
-TOR_C_00020_tagged.txt	19	2911	0.652696668	Mali Izvor	1	1
-TOR_C_00016_tagged.txt	16	2648	0.604229607	Vasilj	999	1
-TOR_C_0073_tagged.txt	6	1044	0.574712644	Gradište	999	1
-TOR_C_0006_tagged.txt	1	177	0.564971751	Novo Korito	1	1
-TOR_C_0045_tagged.txt	16	2847	0.561995083	Minićevo	999	1
-TOR_C_0005_tagged.txt	4	1032	0.387596899	Gornje Zuniče	1	1
-TOR_C_0059_tagged.txt	2	591	0.338409475	Guševac	999	1
-TOR_C_00012_tagged.txt	2	687	0.291120815	Žukovac	1	1
-TOR_C_0072_tagged.txt	1	480	0.208333333	Leskovac	999	1
-TOR_C_00027_tagged.txt	1	833	0.120048019	Kandalica	999	1
-TOR_C_0057_tagged.txt	3	245	1.224489796	Gabrovnica	999	2
-TOR_C_0092_tagged.txt	3	246	1.219512195	Knjaževac	2	2
-TOR_C_0062_tagged.txt	14	1578	0.887198986	Orešac	999	2
-TOR_C_0056_tagged.txt	4	490	0.816326531	Gabrovnica	999	2
-TOR_C_0058_tagged.txt	2	269	0.743494424	Gabrovnica	999	2
-TOR_C_0086_tagged.txt	9	1725	0.52173913	Balanovac	999	2
-TOR_C_0084_tagged.txt	1	192	0.520833333	Drenovac	1	2
-TOR_C_0080_tagged.txt	8	2047	0.390815828	Borovac	999	2
-TOR_C_0075_tagged.txt	3	926	0.323974082	Balta Berilovac	1	2
-TOR_C_0096_tagged.txt	1	541	0.184842884	Knjaževac	2	2
-TOR_C_0089_tagged.txt	39	698	5.58739255	Drenovac	999	999
-TOR_C_0068_tagged.txt	8	407	1.965601966	Stara Kalna	999	999
-TOR_C_0090_tagged.txt	9	501	1.796407186	Drenovac	999	999
-TOR_C_0082_tagged.txt	16	999	1.601601602	Zorunovac	999	999
-TOR_C_0048_tagged.txt	16	1002	1.596806387	Šarbanovac	999	999
-TOR_C_00018_tagged.txt	13	1082	1.201478743	Drečinovac	999	999
-TOR_C_0069_tagged.txt	10	1009	0.991080278	Stara Kalna	999	999
-TOR_C_0067_tagged.txt	10	1014	0.986193294	Rgošte	999	999
-TOR_C_0091_tagged.txt	4	561	0.713012478	Drenovac	999	999
-TOR_C_0066_tagged.txt	11	1789	0.614868642	Radičevac	999	999
-TOR_C_0070_tagged.txt	8	1784	0.448430493	Vrbica	1	999
-TOR_C_0083_tagged.txt	8	2416	0.331125828	Selačka	1	999
+SPEAKER	TRANSCRIPT	AGE	GENDER	N of SI	N od VERBS	Freq of SI
+RS_SC_tagged.txt	TOR_C_0041_tagged.txt	missing	missing	1	missing	0
+TIM_SPK_0001_tagged.txt	TOR_C_0001_tagged.txt	older	female	48	817	58.75152999
+TIM_SPK_0002_tagged.txt	TOR_C_0002_tagged.txt	missing	female	19	1397	13.60057266
+TIM_SPK_0003_tagged.txt	TOR_C_0003_tagged.txt	older	female	23	1326	17.3453997
+TIM_SPK_0005_tagged.txt	TOR_C_0004_tagged.txt	older	female	18	760	23.68421053
+TIM_SPK_0007_tagged.txt	TOR_C_0005_tagged.txt	older	female	4	984	4.06504065
+TIM_SPK_0008_tagged.txt	TOR_C_0006_tagged.txt	older	female	1	159	6.289308176
+TIM_SPK_0009_tagged.txt	TOR_C_0007_tagged.txt	older	female	28	1462	19.15184679
+TIM_SPK_0011_tagged.txt	TOR_C_0009_tagged.txt	older	female	29	1208	24.00662252
+TIM_SPK_0012_tagged.txt	TOR_C_00010_tagged.txt	older	female	27	1685	16.02373887
+TIM_SPK_0013_tagged.txt	TOR_C_00011_tagged.txt	older	female	25	1469	17.01837985
+TIM_SPK_0014_tagged.txt	TOR_C_00011_tagged.txt	younger	male	2	174	11.49425287
+TIM_SPK_0015_tagged.txt	TOR_C_00013_tagged.txt	older	female	30	1463	20.50580998
+TIM_SPK_0016_tagged.txt	TOR_C_00013_tagged.txt	missing	female	1	8	125
+TIM_SPK_0018_tagged.txt	TOR_C_00015_tagged.txt	missing	female	7	535	13.08411215
+TIM_SPK_0020_tagged.txt	TOR_C_00016_tagged.txt	missing	female	16	2260	7.079646018
+TIM_SPK_0021_tagged.txt	TOR_C_0100_tagged.txt	older	male	2	842	2.375296912
+TIM_SPK_0025_tagged.txt	TOR_C_00018_tagged.txt	older	female	13	831	15.64380265
+TIM_SPK_0028_tagged.txt	TOR_C_00019_tagged.txt	older	female	52	1500	34.66666667
+TIM_SPK_0031_tagged.txt	TOR_C_00020_tagged.txt	older	female	7	1457	4.804392588
+TIM_SPK_0032_tagged.txt	TOR_C_00020_tagged.txt	older	female	6	418	14.35406699
+TIM_SPK_0034_tagged.txt	TOR_C_00020_tagged.txt	missing	female	6	541	11.09057301
+TIM_SPK_0035_tagged.txt	TOR_C_00021_tagged.txt	older	female	7	340	20.58823529
+TIM_SPK_0036_tagged.txt	TOR_C_00022_tagged.txt	older	female	2	100	20
+TIM_SPK_0037_tagged.txt	TOR_C_00023_tagged.txt	older	female	13	1392	9.33908046
+TIM_SPK_0038_tagged.txt	TOR_C_00023_tagged.txt	older	female	1	399	2.506265664
+TIM_SPK_0039_tagged.txt	TOR_C_00023_tagged.txt	missing	female	1	104	9.615384615
+TIM_SPK_0040_tagged.txt	TOR_C_00024_tagged.txt	older	female	25	2312	10.81314879
+TIM_SPK_0041_tagged.txt	TOR_C_00024_tagged.txt	older	female	18	726	24.79338843
+TIM_SPK_0043_tagged.txt	TOR_C_00025_tagged.txt	older	female	3	159	18.86792453
+TIM_SPK_0046_tagged.txt	TOR_C_00027_tagged.txt	missing	female	1	696	1.436781609
+TIM_SPK_0047_tagged.txt	TOR_C_00028_tagged.txt	older	female	5	325	15.38461538
+TIM_SPK_0049_tagged.txt	TOR_C_00029_tagged.txt	older	female	19	1793	10.5967652
+TIM_SPK_0050_tagged.txt	TOR_C_00030_tagged.txt	older	female	32	1868	17.13062099
+TIM_SPK_0051_tagged.txt	TOR_C_00030_tagged.txt	missing	male	1	23	43.47826087
+TIM_SPK_0054_tagged.txt	TOR_C_00033_tagged.txt	older	female	52	1470	35.37414966
+TIM_SPK_0055_tagged.txt	TOR_C_00033_tagged.txt	missing	male	1	39	25.64102564
+TIM_SPK_0056_tagged.txt	TOR_C_00034_tagged.txt	older	female	16	1303	12.27935533
+TIM_SPK_0057_tagged.txt	TOR_C_00034_tagged.txt	older	female	15	1172	12.79863481
+TIM_SPK_0058_tagged.txt	TOR_C_00034_tagged.txt	older	female	32	1467	21.81322427
+TIM_SPK_0061_tagged.txt	TOR_C_0037_tagged.txt	missing	female	57	4163	13.692049
+TIM_SPK_0062_tagged.txt	TOR_C_0053_tagged.txt	missing	male	4	1128	3.546099291
+TIM_SPK_0063_tagged.txt	TOR_C_0040_tagged.txt	older	female	37	1884	19.63906582
+TIM_SPK_0068_tagged.txt	TOR_C_0041_tagged.txt	older	female	21	956	21.9665272
+TIM_SPK_0069_tagged.txt	TOR_C_0041_tagged.txt	missing	female	31	1561	19.8590647
+TIM_SPK_0071_tagged.txt	TOR_C_0042_tagged.txt	older	female	11	585	18.8034188
+TIM_SPK_0072_tagged.txt	TOR_C_0042_tagged.txt	older	female	1	478	2.092050209
+TIM_SPK_0075_tagged.txt	TOR_C_0045_tagged.txt	missing	female	11	2406	4.571903574
+TIM_SPK_0076_tagged.txt	TOR_C_0086_tagged.txt	missing	female	9	3160	2.848101266
+TIM_SPK_0077_tagged.txt	TOR_C_0045_tagged.txt	missing	female	1	62	16.12903226
+TIM_SPK_0080_tagged.txt	TOR_C_0045_tagged.txt	missing	female	1	35	28.57142857
+TIM_SPK_0082_tagged.txt	TOR_C_0046_tagged.txt	older	female	55	1562	35.21126761
+TIM_SPK_0085_tagged.txt	TOR_C_0047_tagged.txt	missing	female	19	829	22.91917973
+TIM_SPK_0087_tagged.txt	TOR_C_0048_tagged.txt	missing	female	16	663	24.13273002
+TIM_SPK_0088_tagged.txt	TOR_C_0049_tagged.txt	older	female	64	2317	27.6219249
+TIM_SPK_0095_tagged.txt	TOR_C_0050_tagged.txt	older	female	55	1842	29.85884908
+TIM_SPK_0096_tagged.txt	TOR_C_0051_tagged.txt	older	female	13	1034	12.57253385
+TIM_SPK_0098_tagged.txt	TOR_C_0052_tagged.txt	older	female	15	1180	12.71186441
+TIM_SPK_0101_tagged.txt	TOR_C_0055_tagged.txt	older	female	33	1965	16.79389313
+TIM_SPK_0104_tagged.txt	TOR_C_0058_tagged.txt	older	male	9	790	11.39240506
+TIM_SPK_0106_tagged.txt	TOR_C_0060_tagged.txt	older	female	11	1151	9.556907037
+TIM_SPK_0109_tagged.txt	TOR_C_0061_tagged.txt	older	female	15	1291	11.61890008
+TIM_SPK_0111_tagged.txt	TOR_C_0062_tagged.txt	older	male	13	1325	9.811320755
+TIM_SPK_0113_tagged.txt	TOR_C_0063_tagged.txt	older	female	7	271	25.8302583
+TIM_SPK_0115_tagged.txt	TOR_C_0064_tagged.txt	older	female	10	1054	9.487666034
+TIM_SPK_0118_tagged.txt	TOR_C_0101_tagged.txt	missing	male	13	1328	9.789156627
+TIM_SPK_0119_tagged.txt	TOR_C_0066_tagged.txt	older	female	10	1423	7.027406887
+TIM_SPK_0120_tagged.txt	TOR_C_0066_tagged.txt	older	female	1	16	62.5
+TIM_SPK_0121_tagged.txt	TOR_C_0067_tagged.txt	older	female	10	782	12.78772379
+TIM_SPK_0123_tagged.txt	TOR_C_0068_tagged.txt	older	female	8	370	21.62162162
+TIM_SPK_0125_tagged.txt	TOR_C_0069_tagged.txt	older	female	10	818	12.22493888
+TIM_SPK_0127_tagged.txt	TOR_C_0070_tagged.txt	older	female	8	1526	5.242463958
+TIM_SPK_0129_tagged.txt	TOR_C_0071_tagged.txt	older	female	25	939	26.62406816
+TIM_SPK_0131_tagged.txt	TOR_C_0072_tagged.txt	older	female	1	395	2.53164557
+TIM_SPK_0133_tagged.txt	TOR_C_0073_tagged.txt	older	female	2	552	3.623188406
+TIM_SPK_0134_tagged.txt	TOR_C_0073_tagged.txt	older	female	4	366	10.92896175
+TIM_SPK_0137_tagged.txt	TOR_C_0075_tagged.txt	older	male	3	845	3.550295858
+TIM_SPK_0139_tagged.txt	TOR_C_0077_tagged.txt	older	female	14	1195	11.71548117
+TIM_SPK_0141_tagged.txt	TOR_C_0079_tagged.txt	missing	female	28	839	33.37306317
+TIM_SPK_0142_tagged.txt	TOR_C_0080_tagged.txt	older	male	6	1718	3.492433062
+TIM_SPK_0143_tagged.txt	TOR_C_0080_tagged.txt	older	female	2	134	14.92537313
+TIM_SPK_0147_tagged.txt	TOR_C_0082_tagged.txt	missing	female	13	604	21.52317881
+TIM_SPK_0148_tagged.txt	TOR_C_0082_tagged.txt	missing	male	1	123	8.130081301
+TIM_SPK_0150_tagged.txt	TOR_C_0082_tagged.txt	missing	female	2	46	43.47826087
+TIM_SPK_0151_tagged.txt	TOR_C_0083_tagged.txt	older	female	8	2068	3.868471954
+TIM_SPK_0154_tagged.txt	TOR_C_0084_tagged.txt	older	male	1	158	6.329113924
+TIM_SPK_0157_tagged.txt	TOR_C_0089_tagged.txt	older	female	50	2190	22.83105023
+TIM_SPK_0160_tagged.txt	TOR_C_0093_tagged.txt	younger	female	6	434	13.82488479
+TIM_SPK_0161_tagged.txt	TOR_C_0094_tagged.txt	younger	female	4	508	7.874015748
+TIM_SPK_0163_tagged.txt	TOR_C_0096_tagged.txt	younger	male	1	232	4.310344828
+TIM_SPK_0166_tagged.txt	TOR_C_0092_tagged.txt	younger	male	3	295	10.16949153
+TIM_SPK_0168_tagged.txt	TOR_C_0099_tagged.txt	younger	male	2	449	4.454342984
